@@ -310,16 +310,62 @@ export default function ResultPage() {
 
           {/* 有料版への誘導 or 詳細レポート表示 */}
           {isPaid && detailReport ? (
-            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-2 border-green-300">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-3xl">✨</span>
-                <h3 className="text-lg font-bold text-gray-800">
-                  購入済み詳細レポート
-                </h3>
+            <div className="space-y-6">
+              {/* 購入完了バッジ */}
+              <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white rounded-2xl p-4 text-center shadow-lg">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <span className="text-2xl">✨</span>
+                  <h3 className="text-lg font-bold">詳細レポート</h3>
+                </div>
+                <p className="text-sm opacity-90">ご購入ありがとうございます</p>
               </div>
 
-              <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {detailReport}
+              {/* 詳細レポート本文 */}
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                <div
+                  className="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed"
+                  style={{
+                    whiteSpace: 'pre-wrap',
+                    lineHeight: '1.8'
+                  }}
+                >
+                  {detailReport.split('\n').map((line, index) => {
+                    // ## で始まる見出し
+                    if (line.startsWith('## ')) {
+                      return (
+                        <h2 key={index} className="text-xl font-bold text-gray-800 mt-8 mb-4 pb-2 border-b-2 border-pink-200">
+                          {line.replace('## ', '')}
+                        </h2>
+                      );
+                    }
+                    // ### で始まる小見出し
+                    if (line.startsWith('### ')) {
+                      return (
+                        <h3 key={index} className="text-lg font-bold text-gray-700 mt-6 mb-3">
+                          {line.replace('### ', '')}
+                        </h3>
+                      );
+                    }
+                    // 箇条書き
+                    if (line.trim().startsWith('- ')) {
+                      return (
+                        <li key={index} className="ml-4 mb-2 text-gray-700">
+                          {line.replace(/^- /, '')}
+                        </li>
+                      );
+                    }
+                    // 空行
+                    if (line.trim() === '') {
+                      return <br key={index} />;
+                    }
+                    // 通常のテキスト
+                    return (
+                      <p key={index} className="mb-4 text-gray-700">
+                        {line}
+                      </p>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           ) : loadingReport ? (
