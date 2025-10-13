@@ -140,9 +140,18 @@ export default function Home() {
             <p className="text-xs text-gray-400 mb-2">
               ♡IBJ Matching - AI恋愛診断
             </p>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-400 mb-3">
               ※ 本診断はAIによる傾向分析であり、医学的・心理学的診断ではありません。
             </p>
+            <div className="flex justify-center gap-4 text-xs">
+              <Link href="/terms" className="text-gray-500 hover:text-gray-700 underline">
+                利用規約
+              </Link>
+              <span className="text-gray-300">|</span>
+              <Link href="/privacy" className="text-gray-500 hover:text-gray-700 underline">
+                プライバシーポリシー
+              </Link>
+            </div>
           </div>
         </div>
 

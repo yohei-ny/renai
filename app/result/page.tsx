@@ -411,10 +411,25 @@ export default function ResultPage() {
           </p>
           <button
             onClick={() => router.push('/')}
-            className="text-pink-500 hover:text-pink-600 font-medium text-sm underline"
+            className="text-pink-500 hover:text-pink-600 font-medium text-sm underline mb-2"
           >
             トップに戻る
           </button>
+          <div className="flex justify-center gap-4 text-xs">
+            <button
+              onClick={() => router.push('/terms')}
+              className="text-gray-500 hover:text-gray-700 underline"
+            >
+              利用規約
+            </button>
+            <span className="text-gray-300">|</span>
+            <button
+              onClick={() => router.push('/privacy')}
+              className="text-gray-500 hover:text-gray-700 underline"
+            >
+              プライバシーポリシー
+            </button>
+          </div>
         </div>
       </main>
     </div>

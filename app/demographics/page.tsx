@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Gender, AgeGroup, RelationshipStatus } from '@/types';
 
 export default function DemographicsPage() {
@@ -219,9 +220,18 @@ export default function DemographicsPage() {
           </div>
 
           {/* フッター */}
-          <p className="text-xs text-gray-400 text-center mt-4">
+          <p className="text-xs text-gray-400 text-center mt-4 mb-2">
             ※ 入力いただいた情報は診断結果の最適化にのみ使用します
           </p>
+          <div className="flex justify-center gap-4 text-xs">
+            <Link href="/terms" className="text-gray-500 hover:text-gray-700 underline">
+              利用規約
+            </Link>
+            <span className="text-gray-300">|</span>
+            <Link href="/privacy" className="text-gray-500 hover:text-gray-700 underline">
+              プライバシーポリシー
+            </Link>
+          </div>
         </div>
       </main>
     </div>
