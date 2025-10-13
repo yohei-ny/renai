@@ -13,6 +13,11 @@ export default function ResultPage() {
   const [aiSummary, setAiSummary] = useState<string>('');
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
+  const [diagnosisId, setDiagnosisId] = useState<string>('');
+  const [isPaid, setIsPaid] = useState(false);
+  const [detailReport, setDetailReport] = useState<string>('');
+  const [purchasing, setPurchasing] = useState(false);
+  const [loadingReport, setLoadingReport] = useState(false);
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -59,6 +64,7 @@ export default function ResultPage() {
 
         if (response.ok) {
           const result = await response.json();
+          setDiagnosisId(result.data.diagnosisId);
           setAiSummary(result.data.summaryText);
         } else {
           // APIエラー時はデフォルトテキスト
@@ -75,6 +81,75 @@ export default function ResultPage() {
 
     fetchAnalysis();
   }, [router]);
+
+  // URLパラメータから決済完了をチェック
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paidParam = params.get('paid');
+    const diagnosisIdParam = params.get('diagnosisId');
+
+    if (paidParam === 'true' && diagnosisIdParam) {
+      setIsPaid(true);
+      setDiagnosisId(diagnosisIdParam);
+      fetchDetailedReport(diagnosisIdParam);
+    }
+  }, []);
+
+  // 購入ボタン
+  const handlePurchase = async () => {
+    if (!diagnosisId) {
+      alert('診断IDが見つかりません。もう一度診断をお試しください。');
+      return;
+    }
+
+    setPurchasing(true);
+
+    try {
+      const response = await fetch('/api/payment/create-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ diagnosisId }),
+      });
+
+      if (response.ok) {
+        const { url } = await response.json();
+        // Stripe Checkoutへリダイレクト
+        window.location.href = url;
+      } else {
+        alert('決済ページの読み込みに失敗しました');
+      }
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('決済ページの読み込みに失敗しました');
+    } finally {
+      setPurchasing(false);
+    }
+  };
+
+  // 詳細レポート取得
+  const fetchDetailedReport = async (id: string) => {
+    setLoadingReport(true);
+
+    try {
+      const response = await fetch('/api/generate-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ diagnosisId: id }),
+      });
+
+      if (response.ok) {
+        const { report } = await response.json();
+        setDetailReport(report);
+      } else {
+        alert('レポートの読み込みに失敗しました');
+      }
+    } catch (error) {
+      console.error('Report fetch error:', error);
+      alert('レポートの読み込みに失敗しました');
+    } finally {
+      setLoadingReport(false);
+    }
+  };
 
   if (loading || !scores || !type) {
     return (
@@ -235,31 +310,57 @@ export default function ResultPage() {
             )}
           </div>
 
-          {/* 有料版への誘導 */}
-          <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-2 border-yellow-300">
-            <div className="flex items-start gap-3 mb-4">
-              <span className="text-3xl">🔒</span>
-              <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  AIの詳しい分析を見る（¥480）
+          {/* 有料版への誘導 or 詳細レポート表示 */}
+          {isPaid && detailReport ? (
+            <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-6 border-2 border-green-300">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">✨</span>
+                <h3 className="text-lg font-bold text-gray-800">
+                  購入済み詳細レポート
                 </h3>
-                <p className="text-sm text-gray-700 leading-relaxed">
-                  AIが「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
-                </p>
+              </div>
+
+              <div className="prose prose-sm max-w-none text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {detailReport}
               </div>
             </div>
+          ) : loadingReport ? (
+            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-2 border-yellow-300">
+              <div className="flex items-center justify-center gap-3 py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-pink-500"></div>
+                <p className="text-gray-700 font-medium">詳細レポートを生成中...</p>
+              </div>
+            </div>
+          ) : (
+            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-2 border-yellow-300">
+              <div className="flex items-start gap-3 mb-4">
+                <span className="text-3xl">🔒</span>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                    AIの詳しい分析を見る（¥480）
+                  </h3>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    AIが「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
+                  </p>
+                </div>
+              </div>
 
-            <ul className="text-sm text-gray-700 space-y-2 mb-6 ml-12">
-              <li>✓ あなたの恋愛の本質（800-1000文字）</li>
-              <li>✓ 今のあなたに必要な安心（500-700文字）</li>
-              <li>✓ これからできる行動（700-900文字）</li>
-              <li>✓ 心の整理のヒント（400-600文字）</li>
-            </ul>
+              <ul className="text-sm text-gray-700 space-y-2 mb-6 ml-12">
+                <li>✓ あなたの恋愛の本質（800-1000文字）</li>
+                <li>✓ 今のあなたに必要な安心（500-700文字）</li>
+                <li>✓ これからできる行動（700-900文字）</li>
+                <li>✓ 心の整理のヒント（400-600文字）</li>
+              </ul>
 
-            <button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-full transition-all shadow-lg">
-              詳細レポートを購入する（¥480）
-            </button>
-          </div>
+              <button
+                onClick={handlePurchase}
+                disabled={purchasing || !diagnosisId}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-full transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {purchasing ? '処理中...' : '詳細レポートを購入する（¥480）'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* フッター */}

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Demographics, Answer, Scores, DiagnosisType } from '@/types';
 import { calculateScores, determineType } from '@/lib/scoring';
 import { generateFreeSummary } from '@/lib/gemini';
+import { db } from '@/lib/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,9 +30,26 @@ export async function POST(request: NextRequest) {
       concern
     );
 
+    // Firestoreに保存
+    const diagnosisRef = await addDoc(collection(db, 'diagnoses'), {
+      demographics,
+      answers,
+      concern: concern || null,
+      scores,
+      type,
+      summaryText,
+      detailText: null,
+      isPaid: false,
+      paidAt: null,
+      paymentId: null,
+      amount: null,
+      createdAt: new Date(),
+    });
+
     return NextResponse.json({
       success: true,
       data: {
+        diagnosisId: diagnosisRef.id,
         scores,
         type,
         summaryText
