@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Demographics, Answer, Scores, DiagnosisType } from '@/types';
+import { Scores, DiagnosisType } from '@/types';
 import { calculateScores, determineType } from '@/lib/scoring';
 import { generateFreeSummary } from '@/lib/gemini';
 import { db } from '@/lib/firebase';

@@ -7,7 +7,6 @@ import { calculateScores, determineType, getTypeName, getTypeDescription } from 
 
 export default function ResultPage() {
   const router = useRouter();
-  const [demographics, setDemographics] = useState<Demographics | null>(null);
   const [scores, setScores] = useState<Scores | null>(null);
   const [type, setType] = useState<DiagnosisType | null>(null);
   const [aiSummary, setAiSummary] = useState<string>('');
@@ -42,7 +41,6 @@ export default function ResultPage() {
       // 最低3秒間のローディング演出
       await new Promise(resolve => setTimeout(resolve, 3000));
 
-      setDemographics(demo);
       setScores(calculatedScores);
       setType(diagnosisType);
       setLoading(false);
