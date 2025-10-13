@@ -196,41 +196,41 @@ export default function ResultPage() {
   const typeDescription = getTypeDescription(type);
 
   return (
-    <div className="min-h-screen bg-gradient-romantic py-8 px-4">
+    <div className="min-h-screen bg-gradient-romantic py-4 px-3 sm:py-8 sm:px-4">
       <main className="max-w-2xl mx-auto">
         {/* ヘッダー */}
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-700 mb-2">
+        <div className="text-center mb-4 sm:mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-700 mb-1">
             ♡IBJ Matching
           </h1>
-          <h2 className="text-xl font-bold text-gray-600">
+          <h2 className="text-base sm:text-lg font-bold text-gray-600">
             診断結果
           </h2>
         </div>
 
         {/* 結果カード */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 mb-6">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 space-y-6">
 
           {/* タイプ表示 */}
-          <div className="text-center mb-8 pb-8 border-b-2 border-pink-100">
-            <div className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-8 py-4 rounded-full mb-4">
-              <p className="text-sm font-medium mb-1">あなたは</p>
-              <p className="text-3xl font-bold">「{typeName}」</p>
-              <p className="text-sm mt-1">タイプです</p>
+          <div className="text-center pb-6 border-b-2 border-pink-100">
+            <div className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full">
+              <p className="text-xs sm:text-sm font-medium mb-1">あなたは</p>
+              <p className="text-2xl sm:text-3xl font-bold">「{typeName}」</p>
+              <p className="text-xs sm:text-sm mt-1">タイプです</p>
             </div>
           </div>
 
           {/* スコア表示 */}
-          <div className="mb-8 space-y-4">
-            <h3 className="text-lg font-bold text-gray-700 mb-4">📊 あなたのスコア</h3>
+          <div className="space-y-3">
+            <h3 className="text-base sm:text-lg font-bold text-gray-700 mb-3">📊 あなたのスコア</h3>
 
             {/* 依存スコア */}
             <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600">依存スコア</span>
-                <span className="text-sm font-bold text-pink-600">{scores.anxiety}点</span>
+              <div className="flex justify-between mb-1.5">
+                <span className="text-xs sm:text-sm font-medium text-gray-600">依存スコア</span>
+                <span className="text-xs sm:text-sm font-bold text-pink-600">{scores.anxiety}点</span>
               </div>
-              <div className="bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div className="bg-gray-200 rounded-full h-2.5 sm:h-3 overflow-hidden">
                 <div
                   className="bg-pink-500 h-full transition-all duration-1000"
                   style={{ width: `${scores.anxiety}%` }}
@@ -240,11 +240,11 @@ export default function ResultPage() {
 
             {/* 自立スコア */}
             <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600">自立スコア</span>
-                <span className="text-sm font-bold text-blue-600">{scores.autonomy}点</span>
+              <div className="flex justify-between mb-1.5">
+                <span className="text-xs sm:text-sm font-medium text-gray-600">自立スコア</span>
+                <span className="text-xs sm:text-sm font-bold text-blue-600">{scores.autonomy}点</span>
               </div>
-              <div className="bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div className="bg-gray-200 rounded-full h-2.5 sm:h-3 overflow-hidden">
                 <div
                   className="bg-blue-500 h-full transition-all duration-1000"
                   style={{ width: `${scores.autonomy}%` }}
@@ -254,11 +254,11 @@ export default function ResultPage() {
 
             {/* 理想化スコア */}
             <div>
-              <div className="flex justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600">理想化スコア</span>
-                <span className="text-sm font-bold text-purple-600">{scores.idealization}点</span>
+              <div className="flex justify-between mb-1.5">
+                <span className="text-xs sm:text-sm font-medium text-gray-600">理想化スコア</span>
+                <span className="text-xs sm:text-sm font-bold text-purple-600">{scores.idealization}点</span>
               </div>
-              <div className="bg-gray-200 rounded-full h-3 overflow-hidden">
+              <div className="bg-gray-200 rounded-full h-2.5 sm:h-3 overflow-hidden">
                 <div
                   className="bg-purple-500 h-full transition-all duration-1000"
                   style={{ width: `${scores.idealization}%` }}
@@ -268,17 +268,17 @@ export default function ResultPage() {
           </div>
 
           {/* AI分析 */}
-          <div className="bg-pink-50 rounded-2xl p-6 mb-8">
-            <h3 className="text-lg font-bold text-gray-700 mb-4">
+          <div className="bg-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-5">
+            <h3 className="text-base sm:text-lg font-bold text-gray-700 mb-3">
               💭 {aiSummary ? 'AIによる分析' : '簡易分析'}
             </h3>
 
             {analyzing && !aiSummary ? (
-              <div className="py-6">
-                <div className="flex items-center justify-center gap-3 mb-4">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-pink-500"></div>
+              <div className="py-4 sm:py-6">
+                <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                  <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-t-2 border-b-2 border-pink-500"></div>
                   <div className="animate-pulse">
-                    <p className="text-gray-700 font-medium">AIが詳細に分析中...</p>
+                    <p className="text-gray-700 font-medium text-sm sm:text-base">AIが詳細に分析中...</p>
                   </div>
                 </div>
                 <div className="flex justify-center gap-2">
@@ -286,20 +286,20 @@ export default function ResultPage() {
                   <div className="animate-bounce h-2 w-2 bg-pink-500 rounded-full" style={{ animationDelay: '0.2s' }}></div>
                   <div className="animate-bounce h-2 w-2 bg-pink-500 rounded-full" style={{ animationDelay: '0.4s' }}></div>
                 </div>
-                <p className="text-center text-xs text-gray-500 mt-4">
+                <p className="text-center text-xs text-gray-500 mt-3 sm:mt-4">
                   あなたの回答と悩みを総合的に分析しています
                 </p>
               </div>
             ) : aiSummary ? (
-              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap text-sm sm:text-base">
                 {aiSummary}
               </div>
             ) : (
               <>
-                <p className="text-gray-700 leading-relaxed mb-4">
+                <p className="text-gray-700 leading-relaxed mb-3 text-sm sm:text-base">
                   {typeDescription}
                 </p>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   あなたの回答からは、恋愛において{scores.anxiety > 60 ? '相手への不安' : '安定感'}と
                   {scores.autonomy > 60 ? '自立した姿勢' : '相手への依存'}、
                   そして{scores.idealization > 60 ? '高い理想' : '現実的な視点'}が見えます。
@@ -310,30 +310,24 @@ export default function ResultPage() {
 
           {/* 有料版への誘導 or 詳細レポート表示 */}
           {isPaid && detailReport ? (
-            <div className="space-y-6">
+            <div className="space-y-4">
               {/* 購入完了バッジ */}
-              <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white rounded-2xl p-4 text-center shadow-lg">
+              <div className="bg-gradient-to-r from-green-400 to-emerald-400 text-white rounded-xl sm:rounded-2xl p-3 sm:p-4 text-center shadow-lg">
                 <div className="flex items-center justify-center gap-2 mb-1">
-                  <span className="text-2xl">✨</span>
-                  <h3 className="text-lg font-bold">詳細レポート</h3>
+                  <span className="text-xl sm:text-2xl">✨</span>
+                  <h3 className="text-base sm:text-lg font-bold">詳細レポート</h3>
                 </div>
-                <p className="text-sm opacity-90">ご購入ありがとうございます</p>
+                <p className="text-xs sm:text-sm opacity-90">ご購入ありがとうございます</p>
               </div>
 
               {/* 詳細レポート本文 */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-                <div
-                  className="prose prose-sm md:prose-base max-w-none text-gray-700 leading-relaxed"
-                  style={{
-                    whiteSpace: 'pre-wrap',
-                    lineHeight: '1.8'
-                  }}
-                >
+              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100">
+                <div className="max-w-none text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
                   {detailReport.split('\n').map((line, index) => {
                     // ## で始まる見出し
                     if (line.startsWith('## ')) {
                       return (
-                        <h2 key={index} className="text-xl font-bold text-gray-800 mt-8 mb-4 pb-2 border-b-2 border-pink-200">
+                        <h2 key={index} className="text-lg sm:text-xl font-bold text-gray-800 mt-6 sm:mt-8 mb-3 sm:mb-4 pb-2 border-b-2 border-pink-200">
                           {line.replace('## ', '')}
                         </h2>
                       );
@@ -341,7 +335,7 @@ export default function ResultPage() {
                     // ### で始まる小見出し
                     if (line.startsWith('### ')) {
                       return (
-                        <h3 key={index} className="text-lg font-bold text-gray-700 mt-6 mb-3">
+                        <h3 key={index} className="text-base sm:text-lg font-bold text-gray-700 mt-4 sm:mt-6 mb-2 sm:mb-3">
                           {line.replace('### ', '')}
                         </h3>
                       );
@@ -349,7 +343,7 @@ export default function ResultPage() {
                     // 箇条書き
                     if (line.trim().startsWith('- ')) {
                       return (
-                        <li key={index} className="ml-4 mb-2 text-gray-700">
+                        <li key={index} className="ml-4 mb-2 text-gray-700 text-sm sm:text-base">
                           {line.replace(/^- /, '')}
                         </li>
                       );
@@ -360,7 +354,7 @@ export default function ResultPage() {
                     }
                     // 通常のテキスト
                     return (
-                      <p key={index} className="mb-4 text-gray-700">
+                      <p key={index} className="mb-3 sm:mb-4 text-gray-700 text-sm sm:text-base">
                         {line}
                       </p>
                     );
@@ -369,27 +363,27 @@ export default function ResultPage() {
               </div>
             </div>
           ) : loadingReport ? (
-            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-2 border-yellow-300">
-              <div className="flex items-center justify-center gap-3 py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-pink-500"></div>
-                <p className="text-gray-700 font-medium">詳細レポートを生成中...</p>
+            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-yellow-300">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 py-6 sm:py-8">
+                <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-t-2 border-b-2 border-pink-500"></div>
+                <p className="text-gray-700 font-medium text-sm sm:text-base">詳細レポートを生成中...</p>
               </div>
             </div>
           ) : (
-            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-2xl p-6 border-2 border-yellow-300">
-              <div className="flex items-start gap-3 mb-4">
-                <span className="text-3xl">🔒</span>
+            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-yellow-300">
+              <div className="flex items-start gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <span className="text-2xl sm:text-3xl">🔒</span>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-1 sm:mb-2">
                     AIの詳しい分析を見る（¥480）
                   </h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                     AIが「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
                   </p>
                 </div>
               </div>
 
-              <ul className="text-sm text-gray-700 space-y-2 mb-6 ml-12">
+              <ul className="text-xs sm:text-sm text-gray-700 space-y-1.5 sm:space-y-2 mb-4 sm:mb-5 ml-8 sm:ml-10">
                 <li>✓ あなたの恋愛の本質（800-1000文字）</li>
                 <li>✓ 今のあなたに必要な安心（500-700文字）</li>
                 <li>✓ これからできる行動（700-900文字）</li>
@@ -399,7 +393,7 @@ export default function ResultPage() {
               <button
                 onClick={handlePurchase}
                 disabled={purchasing || !diagnosisId}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-4 px-6 rounded-full transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-full transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 {purchasing ? '処理中...' : '詳細レポートを購入する（¥480）'}
               </button>
