@@ -28,6 +28,22 @@ body {
 /* Stripe決済フォームのロゴを非表示 */
 [data-testid="footer-powered-by-stripe"],
 .p-Footer,
-.Footer {
+.Footer,
+.__PrivateStripeElement iframe[name*="__privateStripeFrame"],
+#\\:r0\\:,
+#\\:r1\\:,
+#\\:r2\\: {
   display: none !important;
+}
+
+/* Stripeのフッター全体を非表示 */
+.__PrivateStripeElement-footer,
+.p-Footer-links,
+[class*="Footer"],
+[class*="PoweredBy"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }

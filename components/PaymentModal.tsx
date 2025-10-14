@@ -55,9 +55,15 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
 
     // デバイス・ブラウザがApple PayやGoogle Payに対応しているか確認
     pr.canMakePayment().then((result) => {
+      console.log('Payment Request canMakePayment result:', result);
       if (result) {
+        console.log('Payment Request is available!');
         setPaymentRequest(pr);
+      } else {
+        console.log('Payment Request is NOT available on this device/browser');
       }
+    }).catch((error) => {
+      console.error('Payment Request error:', error);
     });
 
     // 決済処理
