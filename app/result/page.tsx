@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Answer, Demographics, Scores, DiagnosisType } from '@/types';
 import { calculateScores, determineType, getTypeName, getTypeDescription } from '@/lib/scoring';
 import PaymentModal from '@/components/PaymentModal';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function ResultPage() {
   const router = useRouter();
@@ -344,6 +345,11 @@ export default function ResultPage() {
               </>
             )}
           </div>
+
+          {/* シェアボタン */}
+          {diagnosisId && (
+            <ShareButtons type={type} diagnosisId={diagnosisId} />
+          )}
 
           {/* 有料版への誘導 or 詳細レポート表示 */}
           {isPaid && detailReport ? (
