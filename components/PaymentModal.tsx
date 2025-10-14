@@ -7,6 +7,7 @@ import {
   PaymentElement,
   useStripe,
   useElements,
+  PaymentRequestButtonElement,
 } from '@stripe/react-stripe-js';
 
 // Stripeの公開可能キーを使用
@@ -23,13 +24,77 @@ interface CheckoutFormProps {
   diagnosisId: string;
   onSuccess: () => void;
   onClose: () => void;
+  clientSecret: string;
 }
 
-function CheckoutForm({ diagnosisId, onSuccess, onClose }: CheckoutFormProps) {
+function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: CheckoutFormProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [paymentRequest, setPaymentRequest] = useState<any>(null);
+
+  // Payment Request Button（Apple Pay / Google Pay）の初期化
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const pr = stripe.paymentRequest({
+      country: 'JP',
+      currency: 'jpy',
+      total: {
+        label: 'AI恋愛診断 詳細レポート',
+        amount: 480,
+      },
+      requestPayerName: false,
+      requestPayerEmail: false,
+    });
+
+    // デバイス・ブラウザがApple PayやGoogle Payに対応しているか確認
+    pr.canMakePayment().then((result) => {
+      if (result) {
+        setPaymentRequest(pr);
+      }
+    });
+
+    // 決済処理
+    pr.on('paymentmethod', async (ev) => {
+      try {
+        // Payment Intentの確認
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(
+          clientSecret,
+          { payment_method: ev.paymentMethod.id },
+          { handleActions: false }
+        );
+
+        if (confirmError) {
+          ev.complete('fail');
+          setErrorMessage(confirmError.message || '決済に失敗しました');
+        } else {
+          ev.complete('success');
+
+          // Firestoreを更新
+          if (paymentIntent && paymentIntent.status === 'succeeded') {
+            await fetch('/api/payment/update-status', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                diagnosisId,
+                paymentIntentId: paymentIntent.id,
+              }),
+            });
+
+            onSuccess();
+            onClose();
+          }
+        }
+      } catch (error) {
+        ev.complete('fail');
+        setErrorMessage('決済処理中にエラーが発生しました');
+      }
+    });
+  }, [stripe, diagnosisId, onSuccess, onClose, clientSecret]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,7 +142,30 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose }: CheckoutFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <PaymentElement />
+      {/* Apple Pay / Google Pay ボタン */}
+      {paymentRequest && (
+        <div className="mb-4">
+          <PaymentRequestButtonElement options={{ paymentRequest }} />
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-2 bg-white text-gray-500">または</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <PaymentElement
+        options={{
+          layout: 'tabs',
+          wallets: {
+            applePay: 'auto',
+            googlePay: 'auto',
+          },
+        }}
+      />
 
       {errorMessage && (
         <div className="bg-red-50 border border-red-200 rounded-lg p-3">
@@ -197,6 +285,7 @@ export default function PaymentModal({
               diagnosisId={diagnosisId}
               onSuccess={onSuccess}
               onClose={onClose}
+              clientSecret={clientSecret}
             />
           </Elements>
         ) : (
