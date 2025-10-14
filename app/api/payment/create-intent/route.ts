@@ -10,6 +10,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
  */
 export async function POST(request: NextRequest) {
   try {
+    // Stripe Secret Keyのチェック
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('STRIPE_SECRET_KEY is not set');
+      return NextResponse.json(
+        { error: 'Stripe configuration error' },
+        { status: 500 }
+      );
+    }
+
     const { diagnosisId } = await request.json();
 
     if (!diagnosisId) {
@@ -26,13 +35,10 @@ export async function POST(request: NextRequest) {
       metadata: {
         diagnosisId,
       },
-      // 自動決済確認を有効化（Apple Pay、Google Pay、カードを含む）
+      // 自動決済方法を有効化（カード、Apple Pay、Google Payなどすべて）
       automatic_payment_methods: {
         enabled: true,
-        allow_redirects: 'never', // リダイレクトなしでApple Pay/Google Payを優先
       },
-      // Apple PayとGoogle Payを明示的に許可
-      payment_method_types: ['card'],
     });
 
     return NextResponse.json({
@@ -40,8 +46,16 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Payment Intent creation error:', error);
+    // エラーの詳細をログに出力
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     return NextResponse.json(
-      { error: 'Failed to create payment intent' },
+      {
+        error: 'Failed to create payment intent',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
