@@ -7,6 +7,7 @@ import { calculateScores, determineType, getTypeName, getTypeDescription, getTyp
 import PaymentModal from '@/components/PaymentModal';
 import ShareButtons from '@/components/ShareButtons';
 import PremiumShareButtons from '@/components/PremiumShareButtons';
+import Image from 'next/image';
 
 export default function ResultPage() {
   const router = useRouter();
@@ -256,8 +257,15 @@ export default function ResultPage() {
             <div className="flex flex-col items-center gap-4">
               {/* キャラクター画像 */}
               <div className="relative w-32 h-32 sm:w-40 sm:h-40">
-                <div className="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center">
-                  <span className="text-6xl sm:text-7xl">{character.emoji}</span>
+                <div className="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={character.imagePath}
+                    alt={character.name}
+                    width={160}
+                    height={160}
+                    className="object-cover w-full h-full"
+                    priority
+                  />
                 </div>
               </div>
 

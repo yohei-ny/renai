@@ -119,7 +119,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: '優しくて頼れる。安定感ある包容系。',
       color: '#E8DDD0',
       gradient: 'from-amber-100 to-orange-50',
-      imagePath: '/images/type-a.png'
+      imagePath: '/img/inu.png'
     },
     B: {
       emoji: '🐰',
@@ -127,7 +127,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: '甘え上手で人想い。少し寂しがり屋。',
       color: '#FFC0CB',
       gradient: 'from-pink-100 to-white',
-      imagePath: '/images/type-b.png'
+      imagePath: '/img/usagi.png'
     },
     C: {
       emoji: '🐱',
@@ -135,7 +135,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: '魅力的で行動派。恋に一直線タイプ。',
       color: '#FF7F7F',
       gradient: 'from-rose-200 to-pink-200',
-      imagePath: '/images/type-c.png'
+      imagePath: '/img/neko.png'
     },
     D: {
       emoji: '🦊',
@@ -143,7 +143,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: '一歩引いて観察。心は繊細。',
       color: '#B4C7D3',
       gradient: 'from-gray-200 to-sky-100',
-      imagePath: '/images/type-d.png'
+      imagePath: '/img/kitune.png'
     },
     E: {
       emoji: '🦉',
@@ -151,7 +151,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: 'ロマンチストで考えすぎる知的系。',
       color: '#E6E6FA',
       gradient: 'from-purple-100 to-white',
-      imagePath: '/images/type-e.png'
+      imagePath: '/img/fukuro.png'
     },
     F: {
       emoji: '🐿',
@@ -159,7 +159,7 @@ export function getTypeCharacter(type: DiagnosisType) {
       description: '感情豊かで表情コロコロ変わる天真爛漫系。',
       color: '#98D8C8',
       gradient: 'from-mint-100 to-orange-100',
-      imagePath: '/images/type-f.png'
+      imagePath: '/img/risu.png'
     }
   };
   return characters[type];
