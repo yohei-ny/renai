@@ -6,6 +6,7 @@ import { Answer, Demographics, Scores, DiagnosisType } from '@/types';
 import { calculateScores, determineType, getTypeName, getTypeDescription } from '@/lib/scoring';
 import PaymentModal from '@/components/PaymentModal';
 import ShareButtons from '@/components/ShareButtons';
+import PremiumShareButtons from '@/components/PremiumShareButtons';
 
 export default function ResultPage() {
   const router = useRouter();
@@ -346,8 +347,8 @@ export default function ResultPage() {
             )}
           </div>
 
-          {/* シェアボタン */}
-          {diagnosisId && (
+          {/* シェアボタン（無料版は常に表示） */}
+          {!isPaid && diagnosisId && (
             <ShareButtons type={type} diagnosisId={diagnosisId} />
           )}
 
@@ -404,6 +405,11 @@ export default function ResultPage() {
                   })}
                 </div>
               </div>
+
+              {/* プレミアムシェアボタン */}
+              {diagnosisId && (
+                <PremiumShareButtons type={type} scores={scores} diagnosisId={diagnosisId} />
+              )}
             </div>
           ) : loadingReport ? (
             <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-xl sm:rounded-2xl p-4 sm:p-6 border-2 border-yellow-300">
