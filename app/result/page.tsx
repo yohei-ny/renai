@@ -3,10 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Answer, Demographics, Scores, DiagnosisType } from '@/types';
-import { calculateScores, determineType, getTypeName, getTypeDescription } from '@/lib/scoring';
+import { calculateScores, determineType, getTypeName, getTypeDescription, getTypeCharacter } from '@/lib/scoring';
 import PaymentModal from '@/components/PaymentModal';
 import ShareButtons from '@/components/ShareButtons';
 import PremiumShareButtons from '@/components/PremiumShareButtons';
+import Image from 'next/image';
 
 export default function ResultPage() {
   const router = useRouter();
@@ -233,6 +234,7 @@ export default function ResultPage() {
 
   const typeName = getTypeName(type);
   const typeDescription = getTypeDescription(type);
+  const character = getTypeCharacter(type);
 
   return (
     <div className="min-h-screen bg-gradient-romantic py-4 px-3 sm:py-8 sm:px-4">
@@ -250,12 +252,35 @@ export default function ResultPage() {
         {/* 結果カード */}
         <div className="bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 mb-4 sm:mb-6 space-y-6">
 
-          {/* タイプ表示 */}
-          <div className="text-center pb-6 border-b-2 border-pink-100">
-            <div className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full">
-              <p className="text-xs sm:text-sm font-medium mb-1">あなたは</p>
-              <p className="text-2xl sm:text-3xl font-bold">「{typeName}」</p>
-              <p className="text-xs sm:text-sm mt-1">タイプです</p>
+          {/* タイプ表示 - キャラクター付き */}
+          <div className={`text-center pb-6 border-b-2 border-pink-100 bg-gradient-to-br ${character.gradient} rounded-2xl p-6 sm:p-8`}>
+            <div className="flex flex-col items-center gap-4">
+              {/* キャラクター画像 */}
+              <div className="relative w-32 h-32 sm:w-40 sm:h-40">
+                <div className="absolute inset-0 bg-white rounded-full shadow-lg flex items-center justify-center">
+                  <span className="text-6xl sm:text-7xl">{character.emoji}</span>
+                </div>
+              </div>
+
+              {/* タイプ名 */}
+              <div className="space-y-2">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">あなたは</p>
+                <div className="bg-white/90 backdrop-blur-sm px-6 py-3 sm:px-8 sm:py-4 rounded-full shadow-md">
+                  <p className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
+                    「{typeName}」
+                  </p>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 mt-2">タイプです</p>
+              </div>
+
+              {/* キャラクター説明 */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl px-4 py-3 sm:px-6 sm:py-4 shadow-sm">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">{character.emoji}</span>
+                  <p className="text-base sm:text-lg font-bold text-gray-800">{character.name}</p>
+                </div>
+                <p className="text-sm text-gray-600">{character.description}</p>
+              </div>
             </div>
           </div>
 

@@ -107,3 +107,60 @@ export function getTypeDescription(type: DiagnosisType): string {
   };
   return descriptions[type];
 }
+
+/**
+ * タイプキャラクター情報取得
+ */
+export function getTypeCharacter(type: DiagnosisType) {
+  const characters: Record<DiagnosisType, { emoji: string; name: string; description: string; color: string; gradient: string; imagePath: string }> = {
+    A: {
+      emoji: '🐶',
+      name: 'まろやか柴犬',
+      description: '優しくて頼れる。安定感ある包容系。',
+      color: '#E8DDD0',
+      gradient: 'from-amber-100 to-orange-50',
+      imagePath: '/images/type-a.png'
+    },
+    B: {
+      emoji: '🐰',
+      name: 'ふわふわうさぎ',
+      description: '甘え上手で人想い。少し寂しがり屋。',
+      color: '#FFC0CB',
+      gradient: 'from-pink-100 to-white',
+      imagePath: '/images/type-b.png'
+    },
+    C: {
+      emoji: '🐱',
+      name: 'おしゃれ猫',
+      description: '魅力的で行動派。恋に一直線タイプ。',
+      color: '#FF7F7F',
+      gradient: 'from-rose-200 to-pink-200',
+      imagePath: '/images/type-c.png'
+    },
+    D: {
+      emoji: '🦊',
+      name: 'クールなキツネ',
+      description: '一歩引いて観察。心は繊細。',
+      color: '#B4C7D3',
+      gradient: 'from-gray-200 to-sky-100',
+      imagePath: '/images/type-d.png'
+    },
+    E: {
+      emoji: '🦉',
+      name: '夢見るフクロウ',
+      description: 'ロマンチストで考えすぎる知的系。',
+      color: '#E6E6FA',
+      gradient: 'from-purple-100 to-white',
+      imagePath: '/images/type-e.png'
+    },
+    F: {
+      emoji: '🐿',
+      name: '元気なリス',
+      description: '感情豊かで表情コロコロ変わる天真爛漫系。',
+      color: '#98D8C8',
+      gradient: 'from-mint-100 to-orange-100',
+      imagePath: '/images/type-f.png'
+    }
+  };
+  return characters[type];
+}
