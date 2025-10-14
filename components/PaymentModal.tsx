@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, PaymentRequest } from '@stripe/stripe-js';
 import {
   Elements,
   PaymentElement,
@@ -32,7 +32,7 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [paymentRequest, setPaymentRequest] = useState<unknown>(null);
+  const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(null);
 
   // Payment Request Button（Apple Pay / Google Pay）の初期化
   useEffect(() => {
