@@ -207,15 +207,25 @@ export default function PaymentModal({
 
   useEffect(() => {
     if (isOpen && diagnosisId) {
+      setLoadingSecret(true);
       // Payment Intentを作成
       fetch('/api/payment/create-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ diagnosisId }),
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
+        })
         .then((data) => {
-          setClientSecret(data.clientSecret);
+          if (data.clientSecret) {
+            setClientSecret(data.clientSecret);
+          } else {
+            console.error('No clientSecret in response:', data);
+          }
           setLoadingSecret(false);
         })
         .catch((error) => {
@@ -296,10 +306,15 @@ export default function PaymentModal({
           </Elements>
         ) : (
           <div className="py-12 text-center">
-            <p className="text-red-600 mb-4">決済フォームの読み込みに失敗しました</p>
+            <div className="text-6xl mb-4">😔</div>
+            <p className="text-red-600 font-bold mb-2">決済フォームの読み込みに失敗しました</p>
+            <p className="text-sm text-gray-600 mb-6">
+              エラーが発生しました。もう一度お試しいただくか、<br />
+              しばらく時間をおいてから再度お試しください。
+            </p>
             <button
               onClick={onClose}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-6 rounded-full"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-3 px-8 rounded-full"
             >
               閉じる
             </button>
