@@ -261,8 +261,6 @@ export default function PaymentModal({
     appearance,
     // PaymentElementでウォレット決済を有効化
     loader: 'auto' as const,
-    // Stripeロゴを非表示
-    business: { name: 'IBJ Matching' },
   };
 
   return (
