@@ -32,7 +32,7 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
   const elements = useElements();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [paymentRequest, setPaymentRequest] = useState<any>(null);
+  const [paymentRequest, setPaymentRequest] = useState<unknown>(null);
 
   // Payment Request Button（Apple Pay / Google Pay）の初期化
   useEffect(() => {
@@ -91,7 +91,7 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
             onClose();
           }
         }
-      } catch (error) {
+      } catch {
         ev.complete('fail');
         setErrorMessage('決済処理中にエラーが発生しました');
       }
