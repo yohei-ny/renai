@@ -365,40 +365,73 @@ export default function ResultPage() {
               </div>
 
               {/* 詳細レポート本文 */}
-              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100">
-                <div className="max-w-none text-gray-700 leading-relaxed" style={{ lineHeight: '1.8' }}>
+              <div className="bg-gradient-to-br from-white via-pink-50/30 to-purple-50/30 rounded-xl sm:rounded-2xl p-5 sm:p-8 shadow-lg border border-pink-100">
+                <div className="max-w-none text-gray-700 leading-relaxed" style={{ lineHeight: '1.9' }}>
                   {detailReport.split('\n').map((line, index) => {
                     // ## で始まる見出し
                     if (line.startsWith('## ')) {
+                      const title = line.replace('## ', '');
+                      // セクションに応じたアイコンを追加
+                      let icon = '📖';
+                      if (title.includes('本質')) icon = '💭';
+                      if (title.includes('視点') || title.includes('Why')) icon = '🔍';
+                      if (title.includes('アプローチ') || title.includes('How')) icon = '✨';
+                      if (title.includes('問い') || title.includes('Essence')) icon = '💫';
+
                       return (
-                        <h2 key={index} className="text-lg sm:text-xl font-bold text-gray-800 mt-6 sm:mt-8 mb-3 sm:mb-4 pb-2 border-b-2 border-pink-200">
-                          {line.replace('## ', '')}
-                        </h2>
+                        <div key={index} className="mt-8 first:mt-0 mb-6">
+                          <div className="bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-2xl p-4 sm:p-5 shadow-md">
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl sm:text-3xl">{icon}</span>
+                              <h2 className="text-lg sm:text-xl font-bold flex-1">
+                                {title}
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
                       );
                     }
                     // ### で始まる小見出し
                     if (line.startsWith('### ')) {
                       return (
-                        <h3 key={index} className="text-base sm:text-lg font-bold text-gray-700 mt-4 sm:mt-6 mb-2 sm:mb-3">
+                        <h3 key={index} className="text-base sm:text-lg font-bold text-pink-700 mt-6 sm:mt-7 mb-3 sm:mb-4 pl-4 border-l-4 border-pink-400 bg-pink-50/50 py-2 rounded-r-lg">
                           {line.replace('### ', '')}
                         </h3>
+                      );
+                    }
+                    // **で囲まれた太字
+                    if (line.includes('**')) {
+                      const parts = line.split('**');
+                      return (
+                        <p key={index} className="mb-4 sm:mb-5 text-gray-700 text-sm sm:text-base leading-loose">
+                          {parts.map((part, i) =>
+                            i % 2 === 1 ? (
+                              <strong key={i} className="font-bold text-pink-700 bg-pink-50 px-1 rounded">
+                                {part}
+                              </strong>
+                            ) : (
+                              part
+                            )
+                          )}
+                        </p>
                       );
                     }
                     // 箇条書き
                     if (line.trim().startsWith('- ')) {
                       return (
-                        <li key={index} className="ml-4 mb-2 text-gray-700 text-sm sm:text-base">
+                        <li key={index} className="ml-6 sm:ml-8 mb-3 text-gray-700 text-sm sm:text-base pl-2 relative before:content-['▸'] before:absolute before:left-[-1.2rem] before:text-pink-500 before:font-bold">
                           {line.replace(/^- /, '')}
                         </li>
                       );
                     }
                     // 空行
                     if (line.trim() === '') {
-                      return <br key={index} />;
+                      return <div key={index} className="h-2" />;
                     }
-                    // 通常のテキスト
+                    // 通常のテキスト（段落の最初の文字を装飾）
+                    const isFirstParagraph = index > 0 && detailReport.split('\n')[index - 1].trim() === '';
                     return (
-                      <p key={index} className="mb-3 sm:mb-4 text-gray-700 text-sm sm:text-base">
+                      <p key={index} className={`mb-4 sm:mb-5 text-gray-700 text-sm sm:text-base leading-loose ${isFirstParagraph ? 'first-letter:text-2xl first-letter:font-bold first-letter:text-pink-600 first-letter:mr-1' : ''}`}>
                         {line}
                       </p>
                     );
