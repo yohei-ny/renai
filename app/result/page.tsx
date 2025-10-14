@@ -214,7 +214,7 @@ export default function ResultPage() {
               </div>
               <div className="flex items-center gap-3 text-gray-600">
                 <div className="animate-bounce" style={{ animationDelay: '0.2s' }}>🧠</div>
-                <p className="text-sm">AIがあなたの恋愛傾向を分析中</p>
+                <p className="text-sm">あなたの恋愛傾向を分析中</p>
               </div>
               <div className="flex items-center gap-3 text-gray-600">
                 <div className="animate-bounce" style={{ animationDelay: '0.4s' }}>✨</div>
@@ -306,10 +306,10 @@ export default function ResultPage() {
             </div>
           </div>
 
-          {/* AI分析 */}
+          {/* 診断分析 */}
           <div className="bg-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-5">
             <h3 className="text-base sm:text-lg font-bold text-gray-700 mb-3">
-              💭 {aiSummary ? 'AIによる分析' : '簡易分析'}
+              💭 {aiSummary ? '診断結果' : '簡易分析'}
             </h3>
 
             {analyzing && !aiSummary ? (
@@ -317,7 +317,7 @@ export default function ResultPage() {
                 <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                   <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-t-2 border-b-2 border-pink-500"></div>
                   <div className="animate-pulse">
-                    <p className="text-gray-700 font-medium text-sm sm:text-base">AIが詳細に分析中...</p>
+                    <p className="text-gray-700 font-medium text-sm sm:text-base">詳細に分析中...</p>
                   </div>
                 </div>
                 <div className="flex justify-center gap-2">
@@ -424,10 +424,10 @@ export default function ResultPage() {
                 <span className="text-2xl sm:text-3xl">🔒</span>
                 <div>
                   <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-1 sm:mb-2">
-                    AIの詳しい分析を見る（¥480）
+                    詳しい分析を見る（¥480）
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                    AIが「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
+                    「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
                   </p>
                 </div>
               </div>

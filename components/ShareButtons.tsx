@@ -16,7 +16,7 @@ export default function ShareButtons({ type, diagnosisId }: ShareButtonsProps) {
 
   // Twitterシェア
   const handleTwitterShare = () => {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=AI恋愛診断,恋愛診断`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=恋愛診断,恋愛タイプ`;
     window.open(twitterUrl, '_blank', 'width=550,height=420');
   };
 

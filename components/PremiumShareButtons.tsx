@@ -25,7 +25,7 @@ export default function PremiumShareButtons({ type, scores, diagnosisId }: Premi
   // 詳細なシェアテキストを生成
   const generateDetailedShareText = () => {
     const parts = [
-      `【AI恋愛診断の結果】`,
+      `【恋愛診断の結果】`,
       ``,
       `私のタイプ: 「${typeName}」`,
       ``,
@@ -34,7 +34,7 @@ export default function PremiumShareButtons({ type, scores, diagnosisId }: Premi
       `${getScoreEmoji(scores.autonomy)} 自立度: ${scores.autonomy}点`,
       `${getScoreEmoji(scores.idealization)} 理想化: ${scores.idealization}点`,
       ``,
-      `AIが私の恋愛の本質を深く分析してくれました！`,
+      `私の恋愛の本質を深く分析してくれました！`,
       ``,
       `💡 自分でも気づかなかった恋愛パターンが明確に...`,
       `あなたも試してみませんか？`,
@@ -44,13 +44,13 @@ export default function PremiumShareButtons({ type, scores, diagnosisId }: Premi
 
   // 短縮版シェアテキスト（Twitter用）
   const generateShortShareText = () => {
-    return `【AI恋愛診断】\n私のタイプは「${typeName}」\n\n📊スコア\n依存${scores.anxiety}|自立${scores.autonomy}|理想${scores.idealization}\n\nAIが恋愛の本質を深掘り！\n自分の恋愛パターンが見えてきた✨\n\nあなたも無料で診断👇`;
+    return `【恋愛診断】\n私のタイプは「${typeName}」\n\n📊スコア\n依存${scores.anxiety}|自立${scores.autonomy}|理想${scores.idealization}\n\n恋愛の本質を深掘り！\n自分の恋愛パターンが見えてきた✨\n\nあなたも無料で診断👇`;
   };
 
   // Twitterシェア
   const handleTwitterShare = () => {
     const text = generateShortShareText();
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}&hashtags=AI恋愛診断,恋愛診断,自己理解`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}&hashtags=恋愛診断,恋愛タイプ,自己理解`;
     window.open(twitterUrl, '_blank', 'width=550,height=420');
   };
 
@@ -125,7 +125,7 @@ export default function PremiumShareButtons({ type, scores, diagnosisId }: Premi
             <span>{getScoreEmoji(scores.idealization)} 理想{scores.idealization}</span>
           </div>
           <p className="text-xs text-gray-600 pt-1">
-            💡 AIが恋愛の本質を深掘り！あなたも試してみませんか？
+            💡 恋愛の本質を深掘り！あなたも試してみませんか？
           </p>
         </div>
       </div>
