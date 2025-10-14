@@ -7,7 +7,6 @@ import { calculateScores, determineType, getTypeName, getTypeDescription, getTyp
 import PaymentModal from '@/components/PaymentModal';
 import ShareButtons from '@/components/ShareButtons';
 import PremiumShareButtons from '@/components/PremiumShareButtons';
-import Image from 'next/image';
 
 export default function ResultPage() {
   const router = useRouter();
