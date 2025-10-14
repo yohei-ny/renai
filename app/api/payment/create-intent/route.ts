@@ -26,10 +26,13 @@ export async function POST(request: NextRequest) {
       metadata: {
         diagnosisId,
       },
-      // 自動決済確認を有効化
+      // 自動決済確認を有効化（Apple Pay、Google Pay、カードを含む）
       automatic_payment_methods: {
         enabled: true,
+        allow_redirects: 'never', // リダイレクトなしでApple Pay/Google Payを優先
       },
+      // Apple PayとGoogle Payを明示的に許可
+      payment_method_types: ['card'],
     });
 
     return NextResponse.json({

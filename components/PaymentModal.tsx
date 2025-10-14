@@ -49,6 +49,8 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
       },
       requestPayerName: false,
       requestPayerEmail: false,
+      // Apple PayとGoogle Payを明示的に有効化
+      disableWallets: [], // すべてのウォレットを許可
     });
 
     // デバイス・ブラウザがApple PayやGoogle Payに対応しているか確認
@@ -159,10 +161,15 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
 
       <PaymentElement
         options={{
-          layout: 'tabs',
+          layout: {
+            type: 'tabs',
+            defaultCollapsed: false,
+            radios: false,
+            spacedAccordionItems: true
+          },
           wallets: {
-            applePay: 'auto',
-            googlePay: 'auto',
+            applePay: 'always', // 常にApple Payを表示（対応デバイスの場合）
+            googlePay: 'always', // 常にGoogle Payを表示（対応デバイスの場合）
           },
         }}
       />
@@ -241,6 +248,8 @@ export default function PaymentModal({
   const options = {
     clientSecret,
     appearance,
+    // PaymentElementでウォレット決済を有効化
+    loader: 'auto',
   };
 
   return (
