@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Answer, Demographics, Scores, DiagnosisType } from '@/types';
 import { calculateScores, determineType, getTypeName, getTypeDescription } from '@/lib/scoring';
+import PaymentModal from '@/components/PaymentModal';
 
 export default function ResultPage() {
   const router = useRouter();
@@ -15,8 +16,8 @@ export default function ResultPage() {
   const [diagnosisId, setDiagnosisId] = useState<string>('');
   const [isPaid, setIsPaid] = useState(false);
   const [detailReport, setDetailReport] = useState<string>('');
-  const [purchasing, setPurchasing] = useState(false);
   const [loadingReport, setLoadingReport] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
   useEffect(() => {
     const fetchAnalysis = async () => {
@@ -93,35 +94,19 @@ export default function ResultPage() {
     }
   }, []);
 
-  // 購入ボタン
-  const handlePurchase = async () => {
+  // 購入ボタン（モーダルを開く）
+  const handlePurchase = () => {
     if (!diagnosisId) {
       alert('診断IDが見つかりません。もう一度診断をお試しください。');
       return;
     }
+    setShowPaymentModal(true);
+  };
 
-    setPurchasing(true);
-
-    try {
-      const response = await fetch('/api/payment/create-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ diagnosisId }),
-      });
-
-      if (response.ok) {
-        const { url } = await response.json();
-        // Stripe Checkoutへリダイレクト
-        window.location.href = url;
-      } else {
-        alert('決済ページの読み込みに失敗しました');
-      }
-    } catch (error) {
-      console.error('Payment error:', error);
-      alert('決済ページの読み込みに失敗しました');
-    } finally {
-      setPurchasing(false);
-    }
+  // 決済成功時の処理
+  const handlePaymentSuccess = () => {
+    setIsPaid(true);
+    fetchDetailedReport(diagnosisId);
   };
 
   // 詳細レポート取得
@@ -392,14 +377,22 @@ export default function ResultPage() {
 
               <button
                 onClick={handlePurchase}
-                disabled={purchasing || !diagnosisId}
+                disabled={!diagnosisId}
                 className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-full transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
-                {purchasing ? '処理中...' : '詳細レポートを購入する（¥480）'}
+                詳細レポートを購入する（¥480）
               </button>
             </div>
           )}
         </div>
+
+        {/* 決済モーダル */}
+        <PaymentModal
+          isOpen={showPaymentModal}
+          onClose={() => setShowPaymentModal(false)}
+          diagnosisId={diagnosisId}
+          onSuccess={handlePaymentSuccess}
+        />
 
         {/* フッター */}
         <div className="text-center space-y-2">
