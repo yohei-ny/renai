@@ -161,15 +161,10 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
 
       <PaymentElement
         options={{
-          layout: {
-            type: 'tabs',
-            defaultCollapsed: false,
-            radios: false,
-            spacedAccordionItems: true
-          },
+          layout: 'tabs',
           wallets: {
-            applePay: 'always', // 常にApple Payを表示（対応デバイスの場合）
-            googlePay: 'always', // 常にGoogle Payを表示（対応デバイスの場合）
+            applePay: 'auto',
+            googlePay: 'auto',
           },
         }}
       />
@@ -250,6 +245,8 @@ export default function PaymentModal({
     appearance,
     // PaymentElementでウォレット決済を有効化
     loader: 'auto',
+    // Stripeロゴを非表示
+    business: { name: 'IBJ Matching' },
   };
 
   return (

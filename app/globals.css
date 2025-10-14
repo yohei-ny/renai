@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Stripe決済フォームのロゴを非表示 */
+[data-testid="footer-powered-by-stripe"],
+.p-Footer,
+.Footer {
+  display: none !important;
+}
