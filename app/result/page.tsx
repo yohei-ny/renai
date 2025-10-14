@@ -109,9 +109,10 @@ export default function ResultPage() {
     fetchDetailedReport(diagnosisId);
   };
 
-  // 詳細レポート取得
+  // 詳細レポート取得（ストリーミング対応）
   const fetchDetailedReport = async (id: string) => {
     setLoadingReport(true);
+    setDetailReport(''); // レポートをクリア
 
     try {
       const response = await fetch('/api/generate-report', {
@@ -120,16 +121,67 @@ export default function ResultPage() {
         body: JSON.stringify({ diagnosisId: id }),
       });
 
-      if (response.ok) {
+      if (!response.ok) {
+        alert('レポートの読み込みに失敗しました');
+        setLoadingReport(false);
+        return;
+      }
+
+      // ストリーミングレスポンスをチェック
+      const contentType = response.headers.get('content-type');
+
+      if (contentType?.includes('text/event-stream')) {
+        // ストリーミングレスポンスの処理
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        if (!reader) {
+          throw new Error('Response body is not readable');
+        }
+
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) break;
+
+          // デコードして追加
+          buffer += decoder.decode(value, { stream: true });
+
+          // Server-Sent Events形式のパース
+          const lines = buffer.split('\n\n');
+          buffer = lines.pop() || ''; // 最後の不完全な行をバッファに保持
+
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                const data = JSON.parse(line.slice(6));
+
+                if (data.chunk) {
+                  // リアルタイムでレポートを更新
+                  setDetailReport(prev => prev + data.chunk);
+                }
+
+                if (data.done) {
+                  setLoadingReport(false);
+                }
+              } catch (e) {
+                console.error('Failed to parse SSE data:', e);
+              }
+            }
+          }
+        }
+
+        setLoadingReport(false);
+      } else {
+        // 通常のJSONレスポンス（既存のレポート）
         const { report } = await response.json();
         setDetailReport(report);
-      } else {
-        alert('レポートの読み込みに失敗しました');
+        setLoadingReport(false);
       }
     } catch (error) {
       console.error('Report fetch error:', error);
       alert('レポートの読み込みに失敗しました');
-    } finally {
       setLoadingReport(false);
     }
   };

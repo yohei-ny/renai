@@ -25,25 +25,48 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Stripe決済フォームのロゴを非表示 */
+/* Stripe決済フォームのロゴを完全に非表示 */
 [data-testid="footer-powered-by-stripe"],
 .p-Footer,
 .Footer,
 .__PrivateStripeElement iframe[name*="__privateStripeFrame"],
 #\\:r0\\:,
 #\\:r1\\:,
-#\\:r2\\: {
+#\\:r2\\:,
+/* 右下のStripブランディングを非表示 */
+[class*="BrandIcon"],
+[class*="BrandingText"],
+[data-testid*="stripe"],
+[aria-label*="Stripe"],
+iframe[title*="Secure"],
+iframe[name*="stripe"],
+/* すべてのStripeロゴとバッジ */
+img[alt*="Stripe"],
+img[src*="stripe"],
+svg[aria-label*="Stripe"],
+/* Stripeの決済ボタン内のロゴ */
+button[class*="stripe"] svg,
+div[class*="stripe-brand"] {
   display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
 /* Stripeのフッター全体を非表示 */
 .__PrivateStripeElement-footer,
 .p-Footer-links,
 [class*="Footer"],
-[class*="PoweredBy"] {
+[class*="PoweredBy"],
+[class*="Branding"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
+  max-height: 0 !important;
   overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
