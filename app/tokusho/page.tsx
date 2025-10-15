@@ -25,7 +25,7 @@ export default function TokushoPage() {
                   <dd className="sm:col-span-2 text-gray-800">恋愛診断サービス</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <dt className="font-bold text-gray-700">運営責任者</dt>
+                  <dt className="font-bold text-gray-700">運営統括責任者</dt>
                   <dd className="sm:col-span-2 text-gray-800">能見</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -99,25 +99,70 @@ export default function TokushoPage() {
               </div>
             </section>
 
-            {/* 返品・キャンセルについて */}
+            {/* 返品・返金・キャンセルポリシー */}
             <section className="space-y-4">
               <h2 className="text-xl font-bold text-gray-800 border-l-4 border-pink-500 pl-3">
-                返品・キャンセルについて
+                返品・返金・キャンセルポリシー
+              </h2>
+              <div className="bg-gray-50 rounded-lg p-4 space-y-4">
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">返品・返金について</h3>
+                  <p className="text-gray-800 mb-2">
+                    デジタルコンテンツの性質上、決済完了後の返品・返金は原則として承っておりません。
+                  </p>
+                  <p className="text-gray-800 font-semibold">
+                    ただし、以下の場合は返金対応いたします：
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4 mt-2">
+                    <li>システムエラーによりレポートが表示されない場合</li>
+                    <li>決済は完了したがサービスが提供されない場合</li>
+                    <li>その他、サービス提供に重大な不具合がある場合</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">キャンセルについて</h3>
+                  <p className="text-gray-800">
+                    決済完了前であれば、いつでも無料でキャンセル可能です。決済完了後のキャンセルは上記返金ポリシーに準じます。
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-bold text-gray-800 mb-2">不審請求について</h3>
+                  <p className="text-gray-800">
+                    身に覚えのない請求や不審な請求があった場合は、速やかに下記カスタマーサポートまでご連絡ください。調査の上、適切に対応いたします。
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* カスタマーサポート */}
+            <section className="space-y-4">
+              <h2 className="text-xl font-bold text-gray-800 border-l-4 border-pink-500 pl-3">
+                カスタマーサポート
               </h2>
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
-                <p className="text-gray-800">
-                  デジタルコンテンツの性質上、決済完了後の返品・返金は原則として承っておりません。
+                <p className="text-gray-800 font-semibold">
+                  ご質問・お問い合わせは以下までご連絡ください：
                 </p>
-                <p className="text-gray-800">
-                  ただし、以下の場合は個別に対応いたします：
-                </p>
-                <ul className="list-disc list-inside space-y-1 text-gray-700 ml-4">
-                  <li>システムエラーによりレポートが表示されない場合</li>
-                  <li>決済は完了したがサービスが提供されない場合</li>
-                  <li>その他、サービス提供に重大な不具合がある場合</li>
-                </ul>
-                <p className="text-gray-800 mt-3">
-                  上記の場合は、お問い合わせメールアドレスまでご連絡ください。
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <dt className="font-bold text-gray-700">メールアドレス</dt>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <a href="mailto:yangpingnengwei@gmail.com" className="text-blue-600 hover:underline">
+                      yangpingnengwei@gmail.com
+                    </a>
+                  </dd>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <dt className="font-bold text-gray-700">電話番号</dt>
+                  <dd className="sm:col-span-2 text-gray-800">070-1580-2687</dd>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <dt className="font-bold text-gray-700">対応時間</dt>
+                  <dd className="sm:col-span-2 text-gray-800">平日 10:00-18:00（土日祝日を除く）</dd>
+                </div>
+                <p className="text-sm text-gray-600 mt-3">
+                  ※ お問い合わせ内容により、回答までにお時間をいただく場合がございます。
                 </p>
               </div>
             </section>
