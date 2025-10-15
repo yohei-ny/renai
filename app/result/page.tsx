@@ -242,7 +242,7 @@ export default function ResultPage() {
         {/* ヘッダー */}
         <div className="text-center mb-4 sm:mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-gray-700 mb-1">
-            ♡IBJ Matching
+            恋愛診断サービス
           </h1>
           <h2 className="text-base sm:text-lg font-bold text-gray-600">
             診断結果
@@ -537,7 +537,7 @@ export default function ResultPage() {
           >
             トップに戻る
           </button>
-          <div className="flex justify-center gap-4 text-xs">
+          <div className="flex justify-center gap-4 text-xs flex-wrap">
             <button
               onClick={() => router.push('/terms')}
               className="text-gray-500 hover:text-gray-700 underline"
@@ -550,6 +550,13 @@ export default function ResultPage() {
               className="text-gray-500 hover:text-gray-700 underline"
             >
               プライバシーポリシー
+            </button>
+            <span className="text-gray-300">|</span>
+            <button
+              onClick={() => router.push('/tokusho')}
+              className="text-gray-500 hover:text-gray-700 underline"
+            >
+              特定商取引法
             </button>
           </div>
         </div>
