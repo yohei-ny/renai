@@ -22,7 +22,10 @@ export default function TokushoPage() {
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">販売事業者名</dt>
-                  <dd className="sm:col-span-2 text-gray-800">恋愛診断サービス</dd>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <p className="font-bold">能見</p>
+                    <p className="text-sm text-gray-600 mt-1">（屋号：恋愛診断サービス）</p>
+                  </dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">運営統括責任者</dt>
@@ -30,7 +33,10 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">所在地</dt>
-                  <dd className="sm:col-span-2 text-gray-800">〒142-0041 東京都品川区戸越6-6-12</dd>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <p>請求があったら遅滞なく開示します</p>
+                    <p className="text-sm text-gray-600 mt-1">※ 個人事業主のため、お客様の請求があった場合に開示いたします</p>
+                  </dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">お問い合わせ</dt>
@@ -42,7 +48,10 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">電話番号</dt>
-                  <dd className="sm:col-span-2 text-gray-800">070-1580-2687</dd>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <p>請求があったら遅滞なく開示します</p>
+                    <p className="text-sm text-gray-600 mt-1">※ 個人事業主のため、お客様の請求があった場合に開示いたします</p>
+                  </dd>
                 </div>
               </div>
             </section>
@@ -182,11 +191,14 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">電話番号</dt>
-                  <dd className="sm:col-span-2 text-gray-800">070-1580-2687</dd>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <p>請求があったら遅滞なく開示します</p>
+                    <p className="text-sm text-gray-600 mt-1">※ 個人事業主のため、お客様の請求があった場合に開示いたします</p>
+                  </dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">対応時間</dt>
-                  <dd className="sm:col-span-2 text-gray-800">平日 10:00-18:00（土日祝日を除く）</dd>
+                  <dd className="sm:col-span-2 text-gray-800">メールでのお問い合わせは24時間受付（回答は平日 10:00-18:00）</dd>
                 </div>
                 <p className="text-sm text-gray-600 mt-3">
                   ※ お問い合わせ内容により、回答までにお時間をいただく場合がございます。
