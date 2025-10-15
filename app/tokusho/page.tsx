@@ -59,7 +59,16 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">販売価格</dt>
-                  <dd className="sm:col-span-2 text-gray-800">480円（税込）</dd>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <span className="font-bold">480円（税込）</span>
+                    <p className="text-sm text-gray-600 mt-1">※ 消費税込みの金額です</p>
+                  </dd>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <dt className="font-bold text-gray-700">追加手数料</dt>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    なし（商品代金以外の費用は一切かかりません）
+                  </dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">商品内容</dt>
@@ -77,12 +86,25 @@ export default function TokushoPage() {
               </h2>
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <dt className="font-bold text-gray-700">支払方法</dt>
-                  <dd className="sm:col-span-2 text-gray-800">クレジットカード決済（Stripe）</dd>
+                  <dt className="font-bold text-gray-700">受け付け可能な決済手段</dt>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    <p>クレジットカード決済（Stripe）</p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      ※ Visa、Mastercard、American Express、JCB、Diners Club、Discoverに対応
+                    </p>
+                  </dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <dt className="font-bold text-gray-700">支払時期</dt>
-                  <dd className="sm:col-span-2 text-gray-800">決済は即時処理されます</dd>
+                  <dt className="font-bold text-gray-700">決済期間</dt>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    購入ボタンをクリックし、カード情報を入力後、即時決済されます
+                  </dd>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <dt className="font-bold text-gray-700">セキュリティ</dt>
+                  <dd className="sm:col-span-2 text-gray-800">
+                    Stripe社の安全な決済システムを使用しており、カード情報は当サービスに保存されません
+                  </dd>
                 </div>
               </div>
             </section>
@@ -93,8 +115,13 @@ export default function TokushoPage() {
                 商品の引渡時期
               </h2>
               <div className="bg-gray-50 rounded-lg p-4">
-                <p className="text-gray-800">
-                  決済完了後、即時ご利用いただけます。画面上で詳細レポートが表示されます。
+                <p className="text-gray-800 font-semibold mb-2">
+                  決済完了後、即時ご利用いただけます
+                </p>
+                <p className="text-gray-700 text-sm">
+                  ・クレジットカード決済完了と同時に、画面上で詳細レポートが表示されます<br />
+                  ・ダウンロードや配送の待ち時間は一切ありません<br />
+                  ・決済後すぐに全コンテンツにアクセス可能です
                 </p>
               </div>
             </section>
