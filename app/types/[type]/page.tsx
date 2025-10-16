@@ -29,10 +29,10 @@ export default function TypeDetailPage() {
 
   // SNSシェア用のURL
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const shareText = `私は「${typeName}」タイプでした！\n${character.name} - ${character.description}\n\nあなたも診断してみる？`;
+  const shareText = `私の恋愛タイプは「${typeName}」でした！\nあなたも診断してみませんか？`;
 
   const shareToTwitter = () => {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}&hashtags=恋愛診断,恋愛タイプ`;
     window.open(url, '_blank');
   };
 
