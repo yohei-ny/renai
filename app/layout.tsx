@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI恋愛診断 | あなたの恋愛タイプを20問で診断",
-  description: "AIがあなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。無料で今すぐ始められる恋愛傾向分析サービス。",
-  keywords: "恋愛診断,AI診断,恋愛タイプ,性格診断,恋愛心理,無料診断",
+  title: "恋愛診断 | あなたの恋愛タイプを20問で診断",
+  description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。無料で今すぐ始められる恋愛傾向分析サービス。",
+  keywords: "恋愛診断,恋愛タイプ,性格診断,恋愛心理,無料診断",
   robots: {
     index: true,
     follow: true,
@@ -25,15 +25,15 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "AI恋愛診断 | あなたの恋愛タイプを20問で診断",
-    description: "AIがあなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
+    title: "恋愛診断 | あなたの恋愛タイプを20問で診断",
+    description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
     type: "website",
     locale: "ja_JP",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI恋愛診断 | あなたの恋愛タイプを20問で診断",
-    description: "AIがあなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
+    title: "恋愛診断 | あなたの恋愛タイプを20問で診断",
+    description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
   },
 };
 

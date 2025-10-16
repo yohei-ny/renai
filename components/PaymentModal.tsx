@@ -44,7 +44,7 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
       country: 'JP',
       currency: 'jpy',
       total: {
-        label: 'AI恋愛診断 詳細レポート',
+        label: '恋愛診断 詳細レポート',
         amount: 480,
       },
       requestPayerName: false,
@@ -277,7 +277,7 @@ export default function PaymentModal({
             </button>
           </div>
           <p className="text-sm text-gray-600">
-            AIによる詳細な恋愛診断レポート（2500-3500文字）
+            詳細な恋愛診断レポート（2500-3500文字）
           </p>
         </div>
 

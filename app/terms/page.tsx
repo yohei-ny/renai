@@ -14,7 +14,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第1条（適用）</h2>
               <p>
-                本規約は、IBJ Matching（以下「当サービス」といいます）が提供するAI恋愛診断サービス（以下「本サービス」といいます）の利用条件を定めるものです。
+                本規約は、IBJ Matching（以下「当サービス」といいます）が提供する恋愛診断サービス（以下「本サービス」といいます）の利用条件を定めるものです。
                 利用者の皆様（以下「ユーザー」といいます）には、本規約に従って本サービスをご利用いただきます。
               </p>
             </section>
@@ -23,28 +23,28 @@ export default function TermsPage() {
               <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第2条（サービスの内容）</h2>
               <p className="mb-2">本サービスは、以下の機能を提供します：</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>AIを活用した恋愛傾向の診断</li>
+                <li>恋愛傾向の診断</li>
                 <li>診断結果に基づくパーソナライズされた分析</li>
                 <li>有料オプションとしての詳細レポートの提供</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第3条（AI診断に関する重要事項）</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第3条（診断に関する重要事項）</h2>
               <div className="space-y-2">
                 <p className="font-semibold">ユーザーは、以下の事項を理解し、同意したうえで本サービスを利用するものとします：</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>
                     <span className="font-semibold">医療・心理学的診断ではありません：</span>
-                    本サービスの診断結果は、AI（人工知能）による傾向分析であり、医学的・心理学的診断ではありません。
+                    本サービスの診断結果は傾向分析であり、医学的・心理学的診断ではありません。
                   </li>
                   <li>
                     <span className="font-semibold">専門家の代替ではありません：</span>
                     深刻な悩みや精神的な問題を抱えている場合は、医師、心理カウンセラー等の専門家にご相談ください。
                   </li>
                   <li>
-                    <span className="font-semibold">AIの限界：</span>
-                    AIによる分析は、入力された情報に基づく統計的な推測であり、個人の複雑な感情や状況を完全に理解するものではありません。
+                    <span className="font-semibold">分析の限界：</span>
+                    分析は入力された情報に基づく統計的な推測であり、個人の複雑な感情や状況を完全に理解するものではありません。
                   </li>
                   <li>
                     <span className="font-semibold">結果の解釈：</span>

@@ -132,10 +132,6 @@ export default function TypeDetailPage() {
                 </button>
               </div>
 
-              {/* OG画像情報 */}
-              <div className="text-center text-sm text-gray-500 mt-4">
-                シェア時に {typeNumber}.png の画像が表示されます
-              </div>
             </div>
 
             {/* 診断するボタン */}

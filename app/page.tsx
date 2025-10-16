@@ -10,7 +10,7 @@ export default function Home() {
           {/* キャッチコピー */}
           <div className="mb-6">
             <p className="text-sm text-pink-600 font-medium mb-2 tracking-wider">
-              AIが解き明かす、あなたの恋愛の本質
+              解き明かす、あなたの恋愛の本質
             </p>
             <h1 className="text-5xl md:text-6xl font-black mb-3">
               <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -58,7 +58,7 @@ export default function Home() {
                   <span className="text-purple-500 text-lg">🧠</span>
                   <div>
                     <p className="font-semibold text-sm text-gray-700">深層心理の分析</p>
-                    <p className="text-xs text-gray-500">AIが本質を解明</p>
+                    <p className="text-xs text-gray-500">本質を解明</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
@@ -149,7 +149,7 @@ export default function Home() {
               恋愛診断サービス
             </p>
             <p className="text-xs text-gray-400 mb-3">
-              ※ 本診断はAIによる傾向分析であり、医学的・心理学的診断ではありません。
+              ※ 本診断は傾向分析であり、医学的・心理学的診断ではありません。
             </p>
             <div className="flex justify-center gap-4 text-xs flex-wrap">
               <Link href="/terms" className="text-gray-500 hover:text-gray-700 underline">

@@ -56,7 +56,7 @@ export default function ConcernPage() {
               💭 今の恋愛の悩みや気になることはありますか？
             </label>
             <p className="text-sm text-gray-500 mb-4">
-              （任意）AIがあなたの回答と合わせて、より具体的なアドバイスを生成します
+              （任意）あなたの回答と合わせて、より具体的なアドバイスを生成します
             </p>
             <textarea
               value={concern}
@@ -103,7 +103,7 @@ export default function ConcernPage() {
             <strong className="text-pink-600">💡 入力するとこんなメリットが！</strong><br />
             • あなたの状況に合わせた具体的なアドバイス<br />
             • 今すぐできる行動提案<br />
-            • AIが悩みの背景を分析してくれます
+            • 悩みの背景を分析してくれます
           </p>
         </div>
 

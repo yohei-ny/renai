@@ -26,7 +26,7 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">運営統括責任者</dt>
-                  <dd className="sm:col-span-2 text-gray-800">能味洋平</dd>
+                  <dd className="sm:col-span-2 text-gray-800">能見</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">所在地</dt>
@@ -61,7 +61,7 @@ export default function TokushoPage() {
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">商品名</dt>
-                  <dd className="sm:col-span-2 text-gray-800">AI恋愛診断 詳細レポート</dd>
+                  <dd className="sm:col-span-2 text-gray-800">恋愛診断 詳細レポート</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">販売価格</dt>
@@ -79,7 +79,7 @@ export default function TokushoPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">商品内容</dt>
                   <dd className="sm:col-span-2 text-gray-800">
-                    AIによる恋愛タイプ診断結果の詳細レポート（デジタルコンテンツ）
+                    恋愛タイプ診断結果の詳細レポート（デジタルコンテンツ）
                   </dd>
                 </div>
               </div>
@@ -230,7 +230,7 @@ export default function TokushoPage() {
               </h2>
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <p className="text-gray-800">
-                  本サービスはAIによる恋愛傾向の分析であり、医学的・心理学的診断ではありません。
+                  本サービスは恋愛傾向の分析であり、医学的・心理学的診断ではありません。
                 </p>
                 <p className="text-gray-800">
                   診断結果の解釈や活用については、ご自身の判断でお願いいたします。

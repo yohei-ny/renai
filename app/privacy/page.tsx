@@ -36,11 +36,11 @@ export default function PrivacyPage() {
                 </div>
 
                 <div>
-                  <p className="font-semibold text-gray-800">2. AI処理に関する情報</p>
+                  <p className="font-semibold text-gray-800">2. 処理に関する情報</p>
                   <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
                     <li>Google Gemini APIによる分析処理のために、入力された診断情報が使用されます</li>
-                    <li>AI分析結果（要約文、詳細レポート）はFirebase Firestoreに保存されます</li>
-                    <li>AIによる処理は匿名化された状態で行われ、個人を特定する情報は送信されません</li>
+                    <li>分析結果（要約文、詳細レポート）はFirebase Firestoreに保存されます</li>
+                    <li>処理は匿名化された状態で行われ、個人を特定する情報は送信されません</li>
                   </ul>
                 </div>
 
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
               <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第3条（情報の利用目的）</h2>
               <p className="mb-2">収集した情報は、以下の目的で利用します：</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>AI診断の実施と結果の提供</li>
+                <li>診断の実施と結果の提供</li>
                 <li>診断結果のパーソナライズと精度向上</li>
                 <li>有料サービスの提供と決済処理</li>
                 <li>サービスの改善および新機能の開発</li>
@@ -98,7 +98,7 @@ export default function PrivacyPage() {
                       以下のサービス提供のため、必要最小限の情報を委託先に提供します：
                     </p>
                     <ul className="list-disc list-inside space-y-1 ml-8 text-sm">
-                      <li>Google Gemini API（AIによる診断分析）</li>
+                      <li>Google Gemini API（診断分析）</li>
                       <li>Firebase/Google Cloud（データベース、ホスティング）</li>
                       <li>Stripe（決済処理）</li>
                       <li>Vercel（Webホスティング）</li>
@@ -123,25 +123,25 @@ export default function PrivacyPage() {
             </section>
 
             <section>
-              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第5条（AIによるデータ処理について）</h2>
+              <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">第5条（データ処理について）</h2>
               <div className="space-y-2">
                 <p className="font-semibold">Google Gemini APIの利用に関する重要事項：</p>
                 <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
                   <li>
                     診断のために入力されたすべての情報（属性、回答、悩み）は、
-                    Google Gemini APIに送信され、AI分析が行われます
+                    Google Gemini APIに送信され、分析が行われます
                   </li>
                   <li>
                     送信される情報には、個人を特定できる氏名やメールアドレスは含まれません
                   </li>
                   <li>
-                    Google社のAI利用ポリシーに従い、データは処理されます
+                    Google社の利用ポリシーに従い、データは処理されます
                   </li>
                   <li>
-                    AI分析は統計的な推測であり、結果の正確性を保証するものではありません
+                    分析は統計的な推測であり、結果の正確性を保証するものではありません
                   </li>
                   <li>
-                    AIによる分析結果は医療的・心理学的診断ではありません
+                    分析結果は医療的・心理学的診断ではありません
                   </li>
                 </ul>
                 <p className="mt-2 text-sm">
@@ -236,7 +236,7 @@ export default function PrivacyPage() {
               </p>
               <div className="bg-gray-50 rounded-lg p-4 ml-4">
                 <p className="text-sm text-gray-700">
-                  サービス名：IBJ Matching - AI恋愛診断<br />
+                  サービス名：IBJ Matching - 恋愛診断<br />
                   管理者：IBJ Matching運営チーム<br />
                   URL：https://renai-nine.vercel.app/
                 </p>

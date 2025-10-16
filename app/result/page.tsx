@@ -49,7 +49,7 @@ export default function ResultPage() {
       setType(diagnosisType);
       setLoading(false);
 
-      // AI分析をバックグラウンドで実行
+      // 分析をバックグラウンドで実行
       setAnalyzing(true);
       try {
         const response = await fetch('/api/analyze', {
@@ -526,7 +526,7 @@ export default function ResultPage() {
         {/* フッター */}
         <div className="text-center space-y-2">
           <p className="text-xs text-gray-500">
-            ※ 本診断はAIによる傾向分析であり、医学的・心理学的診断ではありません。
+            ※ 本診断は傾向分析であり、医学的・心理学的診断ではありません。
           </p>
           <p className="text-xs text-gray-500">
             ※ 深刻な悩みがある場合は、専門機関への相談をお勧めします。
