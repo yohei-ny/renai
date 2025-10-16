@@ -26,7 +26,7 @@ export default function TokushoPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">運営統括責任者</dt>
-                  <dd className="sm:col-span-2 text-gray-800">能見</dd>
+                  <dd className="sm:col-span-2 text-gray-800">能味洋平</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">所在地</dt>
