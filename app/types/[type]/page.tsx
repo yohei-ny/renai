@@ -150,7 +150,7 @@ export default function TypeDetailPage() {
             </button>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
