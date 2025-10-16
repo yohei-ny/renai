@@ -96,7 +96,15 @@ export default function Home() {
 
           {/* 6タイプの紹介 */}
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 mb-6">
-            <h3 className="font-bold text-gray-700 mb-4">📋 診断できる6つのタイプ</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-bold text-gray-700">📋 診断できる6つのタイプ</h3>
+              <Link
+                href="/types"
+                className="text-sm text-purple-600 hover:text-purple-700 font-semibold underline"
+              >
+                詳細を見る →
+              </Link>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
               <div className="bg-pink-50 rounded-xl p-3 border border-pink-200">
                 <p className="font-bold text-pink-600">安心型</p>

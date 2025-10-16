@@ -11,7 +11,8 @@ interface ShareButtonsProps {
 export default function ShareButtons({ type, diagnosisId }: ShareButtonsProps) {
   const typeName = getTypeName(type);
   const url = typeof window !== 'undefined' ? window.location.origin : '';
-  const shareUrl = `${url}/?ref=${diagnosisId}`;
+  // 個別タイプページにシェア（OG画像が表示される）
+  const shareUrl = `${url}/types/${type}`;
   const shareText = `私の恋愛タイプは「${typeName}」でした！\nあなたも診断してみませんか？`;
 
   // Twitterシェア
