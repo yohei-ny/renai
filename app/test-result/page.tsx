@@ -4,8 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import { DiagnosisType, Scores } from '@/types';
 import { getTypeName, getTypeDescription, getTypeCharacter } from '@/lib/scoring';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
-export default function TestResultPage() {
+function TestResultContent() {
   const searchParams = useSearchParams();
   const typeParam = searchParams.get('type') as DiagnosisType | null;
 
@@ -181,5 +182,13 @@ export default function TestResultPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function TestResultPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-romantic flex items-center justify-center">読み込み中...</div>}>
+      <TestResultContent />
+    </Suspense>
   );
 }

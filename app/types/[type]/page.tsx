@@ -27,9 +27,6 @@ export default function TypeDetailPage() {
   const character = getTypeCharacter(type);
   const typeNumber = ['A', 'B', 'C', 'D', 'E', 'F'].indexOf(type) + 1;
 
-  // OG画像のパス
-  const ogImage = `/og/${typeNumber}.png`;
-
   // SNSシェア用のURL
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareText = `私は「${typeName}」タイプでした！\n${character.name} - ${character.description}\n\nあなたも診断してみる？`;

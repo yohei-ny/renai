@@ -4,8 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import { DiagnosisType } from '@/types';
 import { getTypeName, getTypeCharacter } from '@/lib/scoring';
 import Image from 'next/image';
+import { Suspense } from 'react';
 
-export default function ScreenshotPage() {
+function ScreenshotContent() {
   const searchParams = useSearchParams();
   const typeParam = searchParams.get('type') as DiagnosisType | null;
 
@@ -86,5 +87,13 @@ export default function ScreenshotPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ScreenshotPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-romantic flex items-center justify-center">読み込み中...</div>}>
+      <ScreenshotContent />
+    </Suspense>
   );
 }
