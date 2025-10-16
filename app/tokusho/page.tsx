@@ -22,14 +22,11 @@ export default function TokushoPage() {
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">販売事業者名</dt>
-                  <dd className="sm:col-span-2 text-gray-800">
-                    <p className="font-bold">能見</p>
-                    <p className="text-sm text-gray-600 mt-1">（屋号：恋愛診断サービス）</p>
-                  </dd>
+                  <dd className="sm:col-span-2 text-gray-800">能味 洋平</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">運営統括責任者</dt>
-                  <dd className="sm:col-span-2 text-gray-800">能見</dd>
+                  <dd className="sm:col-span-2 text-gray-800">能味 洋平</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">所在地</dt>

@@ -16,6 +16,14 @@ export const metadata: Metadata = {
   title: "AI恋愛診断 | あなたの恋愛タイプを20問で診断",
   description: "AIがあなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。無料で今すぐ始められる恋愛傾向分析サービス。",
   keywords: "恋愛診断,AI診断,恋愛タイプ,性格診断,恋愛心理,無料診断",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
   openGraph: {
     title: "AI恋愛診断 | あなたの恋愛タイプを20問で診断",
     description: "AIがあなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
