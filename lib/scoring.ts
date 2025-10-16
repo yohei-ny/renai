@@ -44,38 +44,44 @@ export function calculateScores(answers: Answer[]): Scores {
 export function determineType(scores: Scores): DiagnosisType {
   const { anxiety, autonomy, idealization } = scores;
 
-  // A. 安心型
-  if (anxiety < 50 && autonomy > 60 && idealization < 50) {
-    return 'A';
-  }
-
-  // B. 共感依存型
-  if (anxiety > 60 && autonomy < 50 && idealization < 60) {
-    return 'B';
-  }
-
-  // C. 恋愛過集中型
-  if (anxiety > 60 && autonomy < 50 && idealization > 60) {
-    return 'C';
-  }
-
-  // D. 自立防衛型
-  if (anxiety < 50 && autonomy > 60 && idealization < 50) {
-    return 'D';
-  }
-
-  // E. 理想投影型
-  if (idealization > 70) {
-    return 'E';
-  }
-
-  // F. 感情ジェットコースター型
-  if (anxiety > 70 && idealization > 70) {
+  // F. 感情ジェットコースター型（最も強い条件を最初に判定）
+  if (anxiety > 70 && idealization > 65) {
     return 'F';
   }
 
-  // デフォルトは共感依存型
-  return 'B';
+  // E. 理想投影型（理想化が非常に高い）
+  if (idealization > 70 && anxiety < 65) {
+    return 'E';
+  }
+
+  // C. 恋愛過集中型（依存+理想化が高い）
+  if (anxiety > 60 && idealization > 55 && autonomy < 50) {
+    return 'C';
+  }
+
+  // B. 共感依存型（依存が高く、自立が低い）
+  if (anxiety > 55 && autonomy < 50 && idealization < 60) {
+    return 'B';
+  }
+
+  // D. 自立防衛型（自立が高く、依存が低く、理想化も高い）
+  if (autonomy > 60 && anxiety < 45 && idealization > 50) {
+    return 'D';
+  }
+
+  // A. 安心型（バランスが良い）
+  if (anxiety < 50 && autonomy > 55 && idealization < 55) {
+    return 'A';
+  }
+
+  // どの条件にも当てはまらない場合は、最も高いスコアで判定
+  if (anxiety >= autonomy && anxiety >= idealization) {
+    return 'B'; // 依存が最も高い → 共感依存型
+  } else if (idealization >= anxiety && idealization >= autonomy) {
+    return 'E'; // 理想化が最も高い → 理想投影型
+  } else {
+    return 'A'; // 自立が最も高い → 安心型
+  }
 }
 
 /**
