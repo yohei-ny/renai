@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG画像生成用</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: #f0f0f0;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .instructions {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .instructions h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+      gap: 40px;
+    }
+
+    .og-card {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #ffeef8 0%, #f3e5ff 100%);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* キラキラエフェクト */
+    .og-card::before {
+      content: '✨';
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      font-size: 60px;
+    }
+
+    .og-card::after {
+      content: '💕';
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      font-size: 50px;
+    }
+
+    .trending-badge {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+      z-index: 10;
+    }
+
+    .image-container {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 8px solid rgba(255, 255, 255, 0.9);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .label {
+      font-size: 32px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .type-name {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 30px 80px;
+      border-radius: 80px;
+      box-shadow: 0 15px 50px rgba(102, 126, 234, 0.5);
+    }
+
+    .type-name h2 {
+      font-size: 70px;
+      font-weight: 900;
+      color: white;
+      white-space: nowrap;
+      text-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .type-label {
+      font-size: 32px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .character-info {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      padding: 30px 40px;
+      border-radius: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      text-align: left;
+      max-width: 600px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .character-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .character-emoji {
+      font-size: 50px;
+    }
+
+    .character-name {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .character-desc {
+      font-size: 24px;
+      color: #555;
+      line-height: 1.8;
+      padding-left: 65px;
+    }
+
+    .download-btn {
+      display: block;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 10px 30px;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📸 OG画像生成用（1200x630px）</h1>
+
+    <div class="instructions">
+      <h2>📋 使い方</h2>
+      <ol>
+        <li>各カードを1200x630pxでスクリーンショットしてください</li>
+        <li>以下のファイル名で保存：1.png（犬）、2.png（うさぎ）、3.png（猫）、4.png（キツネ）、5.png（フクロウ）、6.png（リス）</li>
+        <li>保存した画像を <code>/public/og/</code> ディレクトリに配置してください</li>
+        <li>SNSでシェアする際、自動的にこの画像が表示されます</li>
+      </ol>
+    </div>
+
+    <div class="grid">
+      <!-- 1. 犬（A） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">1.png - 犬（安心型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/inu.png" alt="まろやか柴犬">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「安心型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🐶</span>
+              <span class="character-name">まろやか柴犬</span>
+            </div>
+            <p class="character-desc">優しくて頼れる。安定感ある包容系。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. うさぎ（B） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">2.png - うさぎ（共感依存型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/usagi.png" alt="ふわふわうさぎ">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「共感依存型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🐰</span>
+              <span class="character-name">ふわふわうさぎ</span>
+            </div>
+            <p class="character-desc">甘え上手で人想い。少し寂しがり屋。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. 猫（C） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">3.png - 猫（恋愛過集中型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/neko.png" alt="おしゃれ猫">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「恋愛過集中型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🐱</span>
+              <span class="character-name">おしゃれ猫</span>
+            </div>
+            <p class="character-desc">魅力的で行動派。恋に一直線タイプ。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. キツネ（D） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">4.png - キツネ（自立防衛型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/kitune.png" alt="クールなキツネ">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「自立防衛型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🦊</span>
+              <span class="character-name">クールなキツネ</span>
+            </div>
+            <p class="character-desc">一歩引いて観察。心は繊細。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. フクロウ（E） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">5.png - フクロウ（理想投影型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/fukuro.png" alt="夢見るフクロウ">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「理想投影型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🦉</span>
+              <span class="character-name">夢見るフクロウ</span>
+            </div>
+            <p class="character-desc">ロマンチストで考えすぎる知的系。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. リス（F） -->
+      <div>
+        <h3 style="text-align: center; margin-bottom: 20px; font-size: 20px;">6.png - リス（感情ジェットコースター型）</h3>
+        <div class="og-card">
+          <div class="trending-badge">🔥 話題沸騰中</div>
+          <div class="image-container">
+            <img src="public/img/risu.png" alt="元気なリス">
+          </div>
+          <p class="label">あなたは</p>
+          <div class="type-name">
+            <h2>「感情ジェットコースター型」</h2>
+          </div>
+          <p class="type-label">タイプです</p>
+          <div class="character-info">
+            <div class="character-header">
+              <span class="character-emoji">🐿</span>
+              <span class="character-name">元気なリス</span>
+            </div>
+            <p class="character-desc">感情豊かで表情コロコロ変わる天真爛漫系。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align: center; color: #666; font-size: 14px; margin-top: 40px;">
+      各カードを1200x630pxでスクリーンショットして、1.png〜6.pngとして保存してください
+    </p>
+  </div>
+</body>
+</html>
