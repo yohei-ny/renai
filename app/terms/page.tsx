@@ -35,6 +35,10 @@ export default function TermsPage() {
                 <p className="font-semibold">ユーザーは、以下の事項を理解し、同意したうえで本サービスを利用するものとします：</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>
+                    <span className="font-semibold">AI使用に関する注意事項：</span>
+                    本サービスはAI（人工知能）を使用しております。診断結果の内容を保証するものではありません。
+                  </li>
+                  <li>
                     <span className="font-semibold">医療・心理学的診断ではありません：</span>
                     本サービスの診断結果は傾向分析であり、医学的・心理学的診断ではありません。
                   </li>
