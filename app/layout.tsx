@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "恋愛診断 | あなたの恋愛タイプを20問で診断",
   description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。無料で今すぐ始められる恋愛傾向分析サービス。",
   keywords: "恋愛診断,恋愛タイプ,性格診断,恋愛心理,無料診断",
+  verification: {
+    google: "VtCHkn0ApDCY7LXG6QD-LdH_CsZqEXi42e05G_pHkXk",
+  },
   robots: {
     index: true,
     follow: true,
