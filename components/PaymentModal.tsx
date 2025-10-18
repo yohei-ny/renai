@@ -36,9 +36,15 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
 
   // Payment Request Button（Apple Pay / Google Pay）の初期化
   useEffect(() => {
-    if (!stripe) {
+    if (!stripe || !clientSecret) {
       return;
     }
+
+    // iPhoneかどうかを判定
+    const isIPhone = /iPhone/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+    console.log('Device detection:', { isIPhone, isIOS, userAgent: navigator.userAgent });
 
     const pr = stripe.paymentRequest({
       country: 'JP',
@@ -49,21 +55,27 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
       },
       requestPayerName: false,
       requestPayerEmail: false,
-      // Apple PayとGoogle Payを明示的に有効化
-      disableWallets: [], // すべてのウォレットを許可
+      // すべてのウォレットを許可
+      disableWallets: [],
     });
 
     // デバイス・ブラウザがApple PayやGoogle Payに対応しているか確認
     pr.canMakePayment().then((result) => {
       console.log('Payment Request canMakePayment result:', result);
-      if (result) {
-        console.log('Payment Request is available!');
+      // iPhoneの場合は強制的に有効化を試みる
+      if (result || isIOS) {
+        console.log('Payment Request is available!', result);
         setPaymentRequest(pr);
       } else {
         console.log('Payment Request is NOT available on this device/browser');
       }
     }).catch((error) => {
       console.error('Payment Request error:', error);
+      // エラーでもiOSなら試してみる
+      if (isIOS) {
+        console.log('Enabling Payment Request for iOS despite error');
+        setPaymentRequest(pr);
+      }
     });
 
     // 決済処理
@@ -169,8 +181,8 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
         options={{
           layout: 'tabs',
           wallets: {
-            applePay: 'auto',
-            googlePay: 'auto',
+            applePay: 'always',
+            googlePay: 'always',
           },
         }}
       />
