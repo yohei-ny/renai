@@ -8,7 +8,7 @@ interface ShareButtonsProps {
   diagnosisId: string;
 }
 
-export default function ShareButtons({ type, diagnosisId }: ShareButtonsProps) {
+export default function ShareButtons({ type }: ShareButtonsProps) {
   const typeName = getTypeName(type);
   const url = typeof window !== 'undefined' ? window.location.origin : '';
   // 個別タイプページにシェア（OG画像が表示される）

@@ -180,10 +180,6 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
       <PaymentElement
         options={{
           layout: 'tabs',
-          wallets: {
-            applePay: 'always',
-            googlePay: 'always',
-          },
         }}
       />
 

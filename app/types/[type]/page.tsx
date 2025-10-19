@@ -25,7 +25,6 @@ export default function TypeDetailPage() {
   const typeName = getTypeName(type);
   const typeDescription = getTypeDescription(type);
   const character = getTypeCharacter(type);
-  const typeNumber = ['A', 'B', 'C', 'D', 'E', 'F'].indexOf(type) + 1;
 
   // SNSシェア用のURL
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
