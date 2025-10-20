@@ -1,6 +1,21 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function PrivacyPage() {
+  // noindexをクライアントサイドで設定
+  useEffect(() => {
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      metaRobots.setAttribute('content', 'noindex, nofollow');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      meta.content = 'noindex, nofollow';
+      document.head.appendChild(meta);
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-romantic py-8 px-4">
       <main className="max-w-3xl mx-auto">

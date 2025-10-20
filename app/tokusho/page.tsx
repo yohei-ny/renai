@@ -1,8 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function TokushoPage() {
+  // noindexをクライアントサイドで設定
+  useEffect(() => {
+    const metaRobots = document.querySelector('meta[name="robots"]');
+    if (metaRobots) {
+      metaRobots.setAttribute('content', 'noindex, nofollow');
+    } else {
+      const meta = document.createElement('meta');
+      meta.name = 'robots';
+      meta.content = 'noindex, nofollow';
+      document.head.appendChild(meta);
+    }
+  }, []);
   const router = useRouter();
 
   return (
@@ -22,11 +35,11 @@ export default function TokushoPage() {
               <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">販売事業者名</dt>
-                  <dd className="sm:col-span-2 text-gray-800">能見</dd>
+                  <dd className="sm:col-span-2 text-gray-800">能見洋平</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">運営統括責任者</dt>
-                  <dd className="sm:col-span-2 text-gray-800">能見</dd>
+                  <dd className="sm:col-span-2 text-gray-800">能見洋平</dd>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <dt className="font-bold text-gray-700">所在地</dt>
