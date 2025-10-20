@@ -484,33 +484,85 @@ export default function ResultPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-gradient-to-r from-yellow-100 to-pink-100 rounded-xl sm:rounded-2xl p-4 sm:p-5 border-2 border-yellow-300">
-              <div className="flex items-start gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <span className="text-2xl sm:text-3xl">🔒</span>
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-1 sm:mb-2">
-                    詳しい分析を見る（¥480）
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-                    「あなたの恋愛の根本的な思考パターン」と「今の関係を穏やかにする行動法」を具体的に言語化します。
-                  </p>
+            <div className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-pink-50 to-yellow-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-2 border-pink-200 shadow-xl">
+              {/* キラキラ装飾 */}
+              <div className="absolute top-4 right-4 text-3xl sm:text-4xl animate-pulse">✨</div>
+              <div className="absolute bottom-4 left-4 text-2xl sm:text-3xl animate-bounce">💎</div>
+              <div className="absolute top-1/2 right-8 text-xl opacity-50 animate-spin" style={{ animationDuration: '3s' }}>⭐</div>
+
+              {/* 限定感バッジ */}
+              <div className="flex justify-center mb-4">
+                <div className="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 text-white px-6 py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg animate-pulse">
+                  🎁 今だけ特別価格 ¥480
                 </div>
               </div>
 
-              <ul className="text-xs sm:text-sm text-gray-700 space-y-1.5 sm:space-y-2 mb-4 sm:mb-5 ml-8 sm:ml-10">
-                <li>✓ あなたの恋愛の本質（800-1000文字）</li>
-                <li>✓ 今のあなたに必要な安心（500-700文字）</li>
-                <li>✓ これからできる行動（700-900文字）</li>
-                <li>✓ 心の整理のヒント（400-600文字）</li>
-              </ul>
+              <div className="text-center mb-6">
+                <h3 className="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 mb-3">
+                  💫 あなただけの詳細レポート 💫
+                </h3>
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-medium">
+                  2500〜3500文字の深い分析で<br />
+                  <span className="text-pink-600 font-bold">「本当のあなた」と「これからの道」</span>が見えてくる
+                </p>
+              </div>
 
+              {/* 特典リスト - より魅力的に */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 mb-6 shadow-md">
+                <p className="text-center text-sm font-bold text-gray-700 mb-4">📖 レポートの内容</p>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">💭</span>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-800 text-sm sm:text-base">あなたの恋愛の本質</p>
+                      <p className="text-xs text-gray-600">800-1000文字で深層心理を解き明かす</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">🔍</span>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-800 text-sm sm:text-base">今のあなたに必要な視点</p>
+                      <p className="text-xs text-gray-600">500-700文字で心が軽くなるヒント</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">✨</span>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-800 text-sm sm:text-base">3つの具体的アプローチ</p>
+                      <p className="text-xs text-gray-600">700-900文字で明日から使える行動法</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl flex-shrink-0">💫</span>
+                    <div className="flex-1">
+                      <p className="font-bold text-gray-800 text-sm sm:text-base">根源的な問いかけ</p>
+                      <p className="text-xs text-gray-600">400-600文字で自分と向き合う時間</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 購入ボタン - より目立つデザイン */}
               <button
                 onClick={handlePurchase}
                 disabled={!diagnosisId}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-3 sm:py-4 px-4 sm:px-6 rounded-full transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                className="relative w-full bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:from-pink-600 hover:via-purple-600 hover:to-pink-600 text-white font-black py-5 sm:py-6 px-6 rounded-2xl transition-all shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed text-base sm:text-lg transform hover:scale-105 hover:shadow-pink-300"
+                style={{
+                  backgroundSize: '200% 100%',
+                  animation: 'gradient 3s ease infinite'
+                }}
               >
-                詳細レポートを購入する（¥480）
+                <span className="flex items-center justify-center gap-2">
+                  <span className="text-2xl">🎁</span>
+                  <span>詳細レポートを受け取る</span>
+                  <span className="text-2xl">🎁</span>
+                </span>
+                <span className="block text-xs sm:text-sm mt-1 opacity-90">たった¥480で一生使える気づきを</span>
               </button>
+
+              <p className="text-center text-xs text-gray-500 mt-4">
+                🔒 安全な決済｜Apple Pay / Google Pay / カード対応
+              </p>
             </div>
           )}
         </div>
