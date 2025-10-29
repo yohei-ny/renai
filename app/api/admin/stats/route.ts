@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
-import { collection, query, getDocs, where, orderBy, Timestamp } from 'firebase/firestore';
+import { collection, query, getDocs, orderBy } from 'firebase/firestore';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const diagnosesRef = collection(db, 'diagnoses');
 
@@ -10,10 +10,11 @@ export async function GET(request: NextRequest) {
     const q = query(diagnosesRef, orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const diagnoses = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
+    })) as any[];
 
     // 今日の開始時刻（0時）
     const today = new Date();
