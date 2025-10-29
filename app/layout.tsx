@@ -32,11 +32,20 @@ export const metadata: Metadata = {
     description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
     type: "website",
     locale: "ja_JP",
+    images: [
+      {
+        url: "/og/1.png",
+        width: 1200,
+        height: 630,
+        alt: "恋愛診断 - あなたの恋愛タイプを20問で診断",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "恋愛診断 | あなたの恋愛タイプを20問で診断",
     description: "あなたの恋愛の本質を解き明かす。20問の質問で6つのタイプから診断。",
+    images: ["/og/1.png"],
   },
 };
 

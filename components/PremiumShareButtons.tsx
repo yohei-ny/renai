@@ -12,7 +12,8 @@ interface PremiumShareButtonsProps {
 export default function PremiumShareButtons({ type, scores, diagnosisId }: PremiumShareButtonsProps) {
   const typeName = getTypeName(type);
   const url = typeof window !== 'undefined' ? window.location.origin : '';
-  const shareUrl = `${url}/?ref=${diagnosisId}`;
+  // シェア用ページのURL（OG画像が表示される）
+  const shareUrl = `${url}/share/${diagnosisId}`;
 
   // スコアを視覚的に表現
   const getScoreEmoji = (score: number) => {

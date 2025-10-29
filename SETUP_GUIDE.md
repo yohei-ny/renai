@@ -128,27 +128,67 @@ whsec_xxxxxxxxxxxxxxxxxxxxx
 
 ---
 
-## 🔥 手順5: Firebaseプロジェクト作成
+## 💳 手順5: Apple Pay設定（重要）
 
-### 5-1. Firebase Consoleにアクセス
+### 5-1. Apple Payを有効化
+
+Apple PayをStripeで使用するには、ドメインの検証が必要です。
+
+1. **Stripeダッシュボード**にログイン
+2. 左メニュー「**設定**」→「**決済方法**」をクリック
+3. **「Apple Pay」**セクションを見つける
+4. **「Apple Payを有効にする」**をクリック
+
+### 5-2. ドメインを追加・検証
+
+#### 開発環境（localhost）の場合
+
+localhostは自動的に検証されるため、追加設定は不要です。
+
+#### 本番環境（Vercel等）の場合
+
+1. **「ドメインを追加」**をクリック
+2. デプロイ先のドメインを入力
+   ```
+   例: your-app.vercel.app
+   ```
+3. **「ドメインを追加」**をクリック
+4. Stripeが自動的にドメインを検証します
+
+⚠️ **重要な注意点:**
+- デプロイ前にドメイン検証はできません
+- デプロイ後、本番URLでドメインを追加してください
+- 検証には数分かかる場合があります
+- ドメインが検証されるまで、Apple Payは表示されません
+
+### 5-3. 確認方法
+
+1. Stripeダッシュボードの「決済方法」→「Apple Pay」
+2. 追加したドメインのステータスが「検証済み」になっているか確認
+
+---
+
+## 🔥 手順6: Firebaseプロジェクト作成
+
+### 6-1. Firebase Consoleにアクセス
 
 - https://console.firebase.google.com/
 
-### 5-2. プロジェクト作成
+### 6-2. プロジェクト作成
 
 1. **「プロジェクトを追加」**をクリック
 2. プロジェクト名: `ai-love-diagnosis` など
 3. Google Analytics: 不要ならオフ
 4. **「プロジェクトを作成」**
 
-### 5-3. Webアプリを追加
+### 6-3. Webアプリを追加
 
 1. プロジェクト概要ページ
 2. **「</> （Webアプリ）」**アイコンをクリック
 3. アプリ名: `ai-love-diagnosis-web`
 4. **「アプリを登録」**
 
-### 5-4. Firebase設定情報をコピー
+### 6-4. Firebase設定情報をコピー
 
 表示される設定情報をメモ：
 
@@ -165,9 +205,9 @@ const firebaseConfig = {
 
 ---
 
-## 🗄️ 手順6: Firestore設定
+## 🗄️ 手順7: Firestore設定
 
-### 6-1. Firestoreデータベースを作成
+### 7-1. Firestoreデータベースを作成
 
 1. 左メニュー「**Firestore Database**」
 2. **「データベースの作成」**
@@ -175,7 +215,7 @@ const firebaseConfig = {
 4. セキュリティルール: **「テストモードで開始」**
 5. **「有効にする」**
 
-### 6-2. セキュリティルールを設定
+### 7-2. セキュリティルールを設定
 
 後で以下に変更：
 
@@ -195,9 +235,9 @@ service cloud.firestore {
 
 ---
 
-## 🔐 手順7: 環境変数を設定
+## 🔐 手順8: 環境変数を設定
 
-### 7-1. ローカル環境（`.env.local`）
+### 8-1. ローカル環境（`.env.local`）
 
 プロジェクトルートに `.env.local` を作成：
 
@@ -223,7 +263,7 @@ STRIPE_WEBHOOK_SECRET=whsec_xxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
-### 7-2. Vercel環境変数
+### 8-2. Vercel環境変数
 
 デプロイ後、Vercelダッシュボードで同じ内容を設定：
 
@@ -236,7 +276,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 ---
 
-## 📦 手順8: 必要なパッケージをインストール
+## 📦 手順9: 必要なパッケージをインストール
 
 ```bash
 npm install stripe firebase
@@ -254,6 +294,8 @@ npm install stripe firebase
 - [ ] APIキー取得（公開・秘密）
 - [ ] 商品設定（¥480）
 - [ ] Webhook設定
+- [ ] Apple Pay有効化
+- [ ] ドメイン検証（本番環境のみ）
 
 ### Firebase関連
 - [ ] Firebaseプロジェクト作成
@@ -330,3 +372,83 @@ CVC: 任意の3桁（例: 123）
 ---
 
 **準備ができたら教えてください！実装を始めます。**
+
+---
+
+## 🔧 Apple Payトラブルシューティング
+
+### Apple Payボタンが表示されない場合
+
+#### 1. ブラウザのコンソールログを確認
+
+開発者ツールを開いて（F12キー）、以下のようなログを確認してください：
+
+```
+[PaymentRequest] useEffect triggered
+[PaymentRequest] Device detection:
+[PaymentRequest] canMakePayment result:
+```
+
+#### 2. よくある原因と解決方法
+
+| 問題 | 原因 | 解決方法 |
+|------|------|----------|
+| `ClientSecret not available yet` | clientSecretの取得が遅い | 正常です。数秒待ってください |
+| `canMakePayment result: null` | ドメインが検証されていない | Stripeダッシュボードでドメイン検証 |
+| `canMakePayment result: null` | 対応していないブラウザ | Safari、Chromeを使用 |
+| `canMakePayment result: null` | HTTPSでない | localhost以外はHTTPS必須 |
+| エラーメッセージなし | Stripeキーが間違っている | .env.localを確認 |
+
+#### 3. 確認すべきポイント
+
+✅ **開発環境（localhost）の場合:**
+- Safariブラウザを使用していますか？
+- Apple Payに対応したデバイス（iPhoneなど）ですか？
+- Stripeの公開キーは正しく設定されていますか？
+
+✅ **本番環境の場合:**
+- HTTPSで配信されていますか？
+- Stripeダッシュボードでドメインを検証しましたか？
+- ドメインのステータスが「検証済み」になっていますか？
+
+#### 4. デバッグログの見方
+
+良好な状態の例：
+```
+[PaymentRequest] useEffect triggered { hasStripe: true, hasClientSecret: true }
+[PaymentRequest] Device detection: { isIOS: true, isSafari: true }
+[PaymentRequest] canMakePayment result: { applePay: true }
+[PaymentRequest] Available wallets: { applePay: true }
+```
+
+問題がある状態の例：
+```
+[PaymentRequest] useEffect triggered { hasStripe: true, hasClientSecret: true }
+[PaymentRequest] Device detection: { isIOS: true, isSafari: true }
+[PaymentRequest] canMakePayment result: null
+[PaymentRequest] No payment methods available
+[PaymentRequest] Note: Apple Pay requires domain verification in Stripe Dashboard
+```
+
+#### 5. それでも解決しない場合
+
+1. **Stripeダッシュボードを確認**
+   - 「設定」→「決済方法」→「Apple Pay」
+   - ドメインが正しく追加されているか
+   - ステータスが「検証済み」か
+
+2. **別のブラウザで試す**
+   - Safari（推奨）
+   - Chrome（Apple Pay対応版）
+
+3. **キャッシュをクリア**
+   - ブラウザのキャッシュをクリア
+   - ハードリロード（Cmd+Shift+R / Ctrl+Shift+R）
+
+4. **環境変数を再確認**
+   ```bash
+   # .env.local
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_... # 正しいキーか確認
+   ```
+
+---

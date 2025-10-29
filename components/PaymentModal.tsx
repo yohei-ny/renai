@@ -36,15 +36,33 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
 
   // Payment Request Button（Apple Pay / Google Pay）の初期化
   useEffect(() => {
-    if (!stripe || !clientSecret) {
+    console.log('[PaymentRequest] useEffect triggered', {
+      hasStripe: !!stripe,
+      hasClientSecret: !!clientSecret,
+      clientSecret: clientSecret ? `${clientSecret.substring(0, 20)}...` : 'none'
+    });
+
+    if (!stripe) {
+      console.log('[PaymentRequest] Stripe not loaded yet');
+      return;
+    }
+
+    if (!clientSecret) {
+      console.log('[PaymentRequest] ClientSecret not available yet');
       return;
     }
 
     // iPhoneかどうかを判定
     const isIPhone = /iPhone/i.test(navigator.userAgent);
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-    console.log('Device detection:', { isIPhone, isIOS, userAgent: navigator.userAgent });
+    console.log('[PaymentRequest] Device detection:', {
+      isIPhone,
+      isIOS,
+      isSafari,
+      userAgent: navigator.userAgent
+    });
 
     const pr = stripe.paymentRequest({
       country: 'JP',
@@ -59,23 +77,25 @@ function CheckoutForm({ diagnosisId, onSuccess, onClose, clientSecret }: Checkou
       disableWallets: [],
     });
 
+    console.log('[PaymentRequest] Payment Request object created');
+
     // デバイス・ブラウザがApple PayやGoogle Payに対応しているか確認
     pr.canMakePayment().then((result) => {
-      console.log('Payment Request canMakePayment result:', result);
-      // iPhoneの場合は強制的に有効化を試みる
-      if (result || isIOS) {
-        console.log('Payment Request is available!', result);
+      console.log('[PaymentRequest] canMakePayment result:', result);
+      if (result) {
+        console.log('[PaymentRequest] Available wallets:', result);
         setPaymentRequest(pr);
       } else {
-        console.log('Payment Request is NOT available on this device/browser');
+        console.log('[PaymentRequest] No payment methods available on this device/browser');
+        console.log('[PaymentRequest] Note: Apple Pay requires domain verification in Stripe Dashboard');
       }
     }).catch((error) => {
-      console.error('Payment Request error:', error);
-      // エラーでもiOSなら試してみる
-      if (isIOS) {
-        console.log('Enabling Payment Request for iOS despite error');
-        setPaymentRequest(pr);
-      }
+      console.error('[PaymentRequest] canMakePayment error:', error);
+      console.error('[PaymentRequest] Error details:', {
+        message: error.message,
+        type: error.type,
+        code: error.code
+      });
     });
 
     // 決済処理

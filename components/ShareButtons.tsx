@@ -8,11 +8,11 @@ interface ShareButtonsProps {
   diagnosisId: string;
 }
 
-export default function ShareButtons({ type }: ShareButtonsProps) {
+export default function ShareButtons({ type, diagnosisId }: ShareButtonsProps) {
   const typeName = getTypeName(type);
   const url = typeof window !== 'undefined' ? window.location.origin : '';
-  // 個別タイプページにシェア（OG画像が表示される）
-  const shareUrl = `${url}/types/${type}`;
+  // シェア用ページのURL（OG画像が表示される）
+  const shareUrl = `${url}/share/${diagnosisId}`;
   const shareText = `私の恋愛タイプは「${typeName}」でした！\nあなたも診断してみませんか？`;
 
   // Twitterシェア
