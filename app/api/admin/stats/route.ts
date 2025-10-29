@@ -29,7 +29,10 @@ export async function GET() {
 
     // 今日のデータをフィルタリング
     const todayDiagnoses = diagnoses.filter(d => {
-      const createdAt = d.createdAt?.toDate ? d.createdAt.toDate() : new Date(d.createdAt);
+      if (!d.createdAt) return false;
+      const createdAt = typeof d.createdAt === 'object' && 'toDate' in d.createdAt
+        ? d.createdAt.toDate()
+        : new Date(d.createdAt as string | Date);
       return createdAt >= today;
     });
 
@@ -50,7 +53,10 @@ export async function GET() {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
     const last30Days = diagnoses.filter(d => {
-      const createdAt = d.createdAt?.toDate ? d.createdAt.toDate() : new Date(d.createdAt);
+      if (!d.createdAt) return false;
+      const createdAt = typeof d.createdAt === 'object' && 'toDate' in d.createdAt
+        ? d.createdAt.toDate()
+        : new Date(d.createdAt as string | Date);
       return createdAt >= thirtyDaysAgo;
     });
 
@@ -58,7 +64,10 @@ export async function GET() {
     const dailyData: { [key: string]: { diagnoses: number; paid: number; revenue: number } } = {};
 
     last30Days.forEach(d => {
-      const createdAt = d.createdAt?.toDate ? d.createdAt.toDate() : new Date(d.createdAt);
+      if (!d.createdAt) return;
+      const createdAt = typeof d.createdAt === 'object' && 'toDate' in d.createdAt
+        ? d.createdAt.toDate()
+        : new Date(d.createdAt as string | Date);
       const dateKey = createdAt.toISOString().split('T')[0]; // YYYY-MM-DD
 
       if (!dailyData[dateKey]) {
