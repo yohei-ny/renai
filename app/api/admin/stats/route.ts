@@ -2,6 +2,14 @@ import { NextResponse } from 'next/server';
 import { db } from '@/lib/firebase';
 import { collection, query, getDocs, orderBy } from 'firebase/firestore';
 
+interface DiagnosisData {
+  id: string;
+  createdAt?: { toDate: () => Date } | Date | string;
+  isPaid?: boolean;
+  amount?: number;
+  type?: string;
+}
+
 export async function GET() {
   try {
     const diagnosesRef = collection(db, 'diagnoses');
@@ -10,11 +18,10 @@ export async function GET() {
     const q = query(diagnosesRef, orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const diagnoses = querySnapshot.docs.map(doc => ({
+    const diagnoses: DiagnosisData[] = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    })) as any[];
+    }));
 
     // 今日の開始時刻（0時）
     const today = new Date();
